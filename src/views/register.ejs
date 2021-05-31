@@ -1,0 +1,50 @@
+<%- include('templates/head.ejs', {titulo: 'TITULO'}) %>
+
+<div class="d-flex justify-content-center align-items-center my-5">
+  <div class="contenedor-login">
+    <h1 class="text-center text-primary">Registrarse</h1>
+    <form class="row g-3" method="POST" action="/register">
+        <!-- NOMBRE -->
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" name="nombre" placeholder="Introduzca su nombre">
+        </div>
+
+        <!-- APELLIDOS -->
+        <div class="col-md-6">
+          <label for="apellidos" class="form-label">Apellidos</label>
+          <input type="text" class="form-control" name="apellidos" placeholder="Introduzca sus apellidos">
+        </div>
+
+        <!-- CORREO -->
+        <div class="col-12">
+          <label for="correo" class="form-label">Correo</label>
+          <input type="email" class="form-control" name="correo" placeholder="Introduzca su correo">
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <div class="col-md-6">
+          <label for="contra-uno" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" name="contrasenia" placeholder="Introduzca su contraseña">
+        </div>
+
+        <!-- REPETIR CONTRASEÑA -->
+        <div class="col-md-6">
+          <label for="contra-dos" class="form-label">Repetir contraseña</label>
+          <input type="password" class="form-control" id="contra-dos" placeholder="Repita su contraseña">
+        </div>
+       
+        <!-- BOTON REGISTRARSE -->
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary btn-block form-control">Registrarse</button>
+        </div>
+
+        <!-- BOTON LOGIN -->
+        <div class="col-md-6">
+            <a href="/login" class="btn btn-primary btn-block form-control">Login</a>
+        </div>
+    </form>
+  </div>
+</div>
+
+<%- include('templates/footer.ejs') %> 

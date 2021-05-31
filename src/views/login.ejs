@@ -1,0 +1,32 @@
+<%- include('templates/head.ejs', {titulo: 'TITULO'}) %>
+
+<div class="d-flex justify-content-center align-items-center my-5">
+    <div class="contenedor-login">
+        <h1 class="text-center text-primary">Iniciar Sesión</h1>
+        <form action="" class="row g-3" method="POST">
+            <!-- CORREO -->
+            <div class="col-12">
+                <label for="correo" class="form-label">Correo</label>
+                <input type="email" class="form-control" name="correo" placeholder="Introduzca su correo" autofocus>
+            </div>
+
+            <!-- CONTRASEÑA -->
+            <div class="col-12">
+                <label for="contra-uno" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="contrasenia" placeholder="Introduzca su contraseña">
+            </div>
+        
+            <!-- BOTON ENTRAR -->
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary btn-block form-control">Entrar</button>
+            </div>
+
+            <!-- BOTON LOGIN -->
+            <div class="col-md-6">
+                <a href="/register" class="btn btn-primary btn-block form-control">Registrarse</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('templates/footer.ejs') %> 

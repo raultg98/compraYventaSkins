@@ -1,0 +1,75 @@
+<%- include('../templates/head.ejs', { titulo: 'Usuarios Registrados' })%>
+
+<%- include('../templates/navbar.ejs') %> 
+
+<div class="container p-4">
+    <%- include('navbarAdmin.ejs')  %> 
+</div>
+
+<div class="container px-4">
+    <div class="row">
+
+        <% usuarios.forEach(usuario => { %>
+            <!-- SOLAMENENTE QUIERO MOSTRAR LOS USUARIOS QUE NO SON ADMINISTRADORES -->
+            <!-- AL HACER LA COSULTA MYSQL ME DEVUELVE UN 1 EN CASO DE TRUE Y 0 EN EL CASO DE FALSE -->
+            <% if(usuario.admin === 0 && usuario.id_user !== 1){ %> 
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p><strong>Id: </strong> <%= usuario.id_user %> </p> 
+                            <p><strong>Nombre: </strong> <%= usuario.nombre %> </p> 
+                            <p><strong>Apellidos: </strong> <%= usuario.apellidos %> </p> 
+                            <p><strong>Correo: </strong> <%= usuario.correo %> </p> 
+
+                            <!-- COMPRUEBO QUE NO SEA EL SUPER ADMIN -->
+                                <!-- BOTON QUE ME BORRA AL USUARIO -->
+                            <div class="d-flex justify-content-center my-2">
+                                <a href="/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
+                                    Eliminar Usuario
+                                </a>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <a href="/usuarios/setAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
+                                    Convertir Admin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <% } else { %> 
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <p><strong>Id: </strong> <%= usuario.id_user %> </p> 
+                            <p><strong>Nombre: </strong> <%= usuario.nombre %> </p> 
+                            <p><strong>Apellidos: </strong> <%= usuario.apellidos %> </p> 
+                            <p><strong>Correo: </strong> <%= usuario.correo %> </p> 
+
+                            <% if(usuario.id_user !== 1){ %>
+
+                                <div class="d-flex justify-content-center my-2">
+                                    <a href="/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
+                                        Eliminar Usuario
+                                    </a>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <a href="/usuarios/removeAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
+                                        Quitar Admin
+                                    </a>
+                                </div> 
+
+                            <% } %> 
+                            
+                        </div>
+                    </div>
+                </div>
+            <% } %> 
+        <% }) %> 
+
+    </div>
+</div>
+
+<%- include('../templates/footer.ejs') %> 
