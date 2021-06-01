@@ -1,0 +1,71 @@
+<%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
+
+<%- include('../templates/navbar.ejs') %> 
+
+
+<div class="container p-4">
+    <%- include('navbarAdmin.ejs')  %> 
+</div>
+
+<div class="container p-4">
+    <a href="/skins/create" class="btn btn-primary btn-block text-white  col-md-6 col-12">
+        <i class="far fa-plus-square"></i> AÑADIR UNA NUEVA SKIN 
+    </a>
+</div>
+
+<div class="container p-4">
+    <div class="d-flex justify-content-center row">
+        <div class="col-8">
+
+            <form action="" method="POST">
+                <div class="d-flex justify-content-center">
+                    <img src="<%= datos.foto %>" alt="" style="width: 40%;">
+                </div>
+                <div class="form-group">
+                    <label for="nombre"><h5>Nombre: </h5></label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<%= datos.nombre %>"
+                           value="<%= datos.nombre %>">
+                </div><br>
+
+                <div class="form-group">
+                    <label for="precio"><h5>Precio: </h5></label>
+                    <input type="number" class="form-control" id="precio" name="precio" placeholder="<%= datos.precio %>"
+                           value="<%= datos.precio %>">
+                </div><br>
+
+                <div class="form-group">
+                    <label for="img"><h5>Imagen: </h5></label>
+                    <input type="text" class="form-control" id="img" name="foto" placeholder="<%= datos.foto %>"
+                           value="<%= datos.foto %>">
+                </div><br>
+
+                <div class="form-group">
+                    <label for="categoria"><h5>Categoria: </h5></label>
+                    <input type="text" class="form-control" id="categoria" name="categoria" placeholder="<%= datos.categoria %>"
+                           value="<%= datos.categoria %>">
+                </div><br>
+
+                <div class="form-group">
+                    <label for="descripcion"><h5>Descripcion: </h5></label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="<%= datos.descripcion %>"
+                           value="<%= datos.descripcion %>">
+                </div><br>
+
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-success btn-block mx-2 text-white col-md-6 col-12">
+                        <i class="far fa-save"></i> Guardar 
+                    </button>
+
+                    <a href="/skins" class="btn btn-primary btn-block text-white  col-md-6 col-12">
+                        <i class="fas fa-undo"></i> Volver 
+                    </a>
+                </div>
+               
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<%- include('../templates/footer.ejs') %> 
