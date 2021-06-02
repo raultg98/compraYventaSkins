@@ -1,4 +1,4 @@
-<%- include('templates/head.ejs', {titulo: 'TITULO'}) %>
+<%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
 
 <div class="d-flex justify-content-center align-items-center my-5">
   <div class="contenedor-login">
@@ -31,7 +31,7 @@
         <!-- REPETIR CONTRASEÑA -->
         <div class="col-md-6">
           <label for="contra-dos" class="form-label">Repetir contraseña</label>
-          <input type="password" class="form-control" id="contra-dos" placeholder="Repita su contraseña">
+          <input type="password" class="form-control" name="Rcontrasenia" id="contra-dos" placeholder="Repita su contraseña">
         </div>
        
         <!-- BOTON REGISTRARSE -->
@@ -47,4 +47,4 @@
   </div>
 </div>
 
-<%- include('templates/footer.ejs') %> 
+<%- include('../templates/footer.ejs') %> 

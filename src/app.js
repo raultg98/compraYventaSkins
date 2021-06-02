@@ -2,6 +2,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const session = require('express-session');
+const { database }= require('./db/keys');
 
 const app = express();
 
@@ -14,11 +16,24 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
 // MIDDLEWARE
+app.use(session({
+    secret: 'secret', 
+    resave: true, 
+    saveUninitialized: true
+}));
+
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 
+// VARIABLES GLOBALES
+app.use((req, res, next) => {
+    next();
+})
+
 // RUTAS
 app.use(require('./routes/appRoutes'));
+app.use(require('./routes/adminRoutes'));
+app.use(require('./routes/loginRoutes'));
 
 // ARCHIVOS ESTATICOS
 app.use(express.static(path.join(__dirname, 'public')));
