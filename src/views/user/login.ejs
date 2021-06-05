@@ -1,5 +1,19 @@
 <%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
 
+<div class="mx-5 my-3">
+    <% if(errors.length > 0){ %>
+      <% errors.forEach(err => { %>
+  
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= err.text %> 
+  
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+  
+      <% }) %> 
+    <% } %>
+  </div>
+
 <div class="d-flex justify-content-center align-items-center my-5">
     <div class="contenedor-login">
         <h1 class="text-center text-primary">Iniciar Sesión</h1>

@@ -1,5 +1,4 @@
--- SCRIP QUE UTILIZO PARA HACER LAS CONSULTAS O MODIFICICACIONES DE LAS TABLAS
-
+/* SCRIPT QUE CREA LA BASE DE DATOS, LAS TABLAS Y HACE ALGUNOS INSERT*/
 CREATE DATABASE proyecto;
 
 USE proyecto;
@@ -9,7 +8,7 @@ CREATE TABLE usuarios(
     nombre VARCHAR(16) not null, 
     apellidos varchar(30) not null, 
     correo varchar(40) not null,
-    contrasenia varchar(30) not null,
+    contrasenia varchar(255) not null,
     admin boolean not null, 
     primary key clave_primaria_usuarios (id_user)
 );
@@ -24,7 +23,8 @@ CREATE TABLE skins(
     primary key clave_primaria_skins (id_skin)
 );
 
-
+INSERT INTO usuarios(nombre, apellidos, correo, contrasenia, admin)
+VALUES ('Admin', 'admin', 'admin@gmail.com', 'admin', true);
 
 INSERT INTO skins(nombre, foto, precio, categoria)
     VALUES ('Fire Serpent', '/img/ak47-fireSerpent.png', 3000, 'AK47'), 
@@ -64,6 +64,8 @@ INSERT INTO skins(nombre, foto, precio, categoria)
            ('Heat', '/img/mag7-heat.png', 2, 'MAG7'),
            ('Justice', '/img/mag7-justice.png', 40, 'MAG7');
 
+/***************************************************************************************************/
+
 CREATE TABLE compras(
     id_compra int(10) auto_increment, 
     fecha date not null, 
@@ -78,14 +80,9 @@ CREATE TABLE ventas(
     PRIMARY KEY pk_venta (id_venta)
 );
 
-
 alter table usuarios add rol int(1);
 username varchar(15) not null, 
 
 ALTER TABLE usuarios CHANGE rol admin BOOLEAN;
 
 update usuarios set nombre = 'SUPER ADMIN' WHERE id_user = 1;
-
-
-INSERT INTO usuarios(nombre, apellidos, correo, contrasenia, admin)
-VALUES ('Admin', 'admin', 'admin@gmail.com', 'admin', true);

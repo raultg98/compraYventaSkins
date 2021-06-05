@@ -13,21 +13,38 @@ router.get('/', (req, res, next)=>{
 
 /*************    INICIO    *************/
 router.get('/inicio', (req, res, next)=>{
+    // COMPRUEBO SI HAY UN SESSION ACTIVA, EN CASO DE NO EXISTIR SESSION, REDIRIJO A '/login'.
+    if(req.session.usuario == null){
+        res.redirect('/login');
+    }else{
+        const usuario = req.session.usuario;
+        res.render('index', { usuario });
+    }
 
-    res.render('index');
+   
 });
 
 
 /*************    COMPRAR    *************/
 router.get('/comprar', (req, res, next) => {
-    res.render('comprar');
+    if(req.session.usuario == null){
+        res.redirect('/login');
+    }else{
+        const usuario = req.session.usuario;
+        res.render('comprar');
+    }
 });
 
 
 /*************    VENDER    *************/
 router.get('/vender', (req, res, next) => {
 
-    res.render('vender');
+    if(req.session.usuario == null){
+        res.redirect('/login');
+    }else{
+        const usuario = req.session.usuario;
+        res.render('vender');
+    }
 });
 
 

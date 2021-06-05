@@ -13,7 +13,7 @@ router.get('/usuarios/setAdmin/:id', controller.setAdminById);
 router.get('/usuarios/removeAdmin/:id', controller.removeAdminById);
 
 
-/***************     SKINS     ***************/
+// /***************     SKINS     ***************/
 router.get('/skins', controller.getSkins);
 
 router.get('/skins/delete/:id', controller.deleteSkinById);

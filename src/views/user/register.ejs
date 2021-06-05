@@ -1,6 +1,22 @@
 <%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
 
-<div class="d-flex justify-content-center align-items-center my-5">
+
+<div class="mx-5 my-3">
+  <% if(errors.length > 0){ %>
+    <% errors.forEach(err => { %>
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= err.text %> 
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+    <% }) %> 
+  <% } %>
+</div>
+
+
+<div class="d-flex justify-content-center align-items-center mx-5">
   <div class="contenedor-login">
     <h1 class="text-center text-primary">Registrarse</h1>
     <form class="row g-3" method="POST" action="/register">
@@ -31,7 +47,7 @@
         <!-- REPETIR CONTRASEÑA -->
         <div class="col-md-6">
           <label for="contra-dos" class="form-label">Repetir contraseña</label>
-          <input type="password" class="form-control" name="Rcontrasenia" id="contra-dos" placeholder="Repita su contraseña">
+          <input type="password" class="form-control" name="contrasenia2" id="contra-dos" placeholder="Repita su contraseña">
         </div>
        
         <!-- BOTON REGISTRARSE -->

@@ -4,13 +4,13 @@ const controller = require('../controller/controllerLogin');
 const router = Router();
 
 /***************     LOGIN     ***************/
-router.get('/login', controller.formLogin);
+router.get('/login', controller.getLogin);
 
-router.post('/login', controller.getLogin);
+router.post('/login', controller.postLogin);
 
 /***************     REGISTER     ***************/
-router.get('/register', controller.formRegister);
+router.get('/register', controller.getRegister);
 
-router.post('/register', controller.getRegister);
+router.post('/register', controller.postRegister);
 
 module.exports = router;

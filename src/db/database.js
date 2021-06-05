@@ -26,7 +26,7 @@ pool.getConnection((err, connection) => {
 });
 
 // PARA QUE AL HACER CONSULTAS PUEDA UTILIZAR TANTO PROMESAS COMO ASYNC/AWAY
-pool.query = promisify(pool.query);
+// pool.query = promisify(pool.query);
 
 
 module.exports = pool;

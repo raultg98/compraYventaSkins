@@ -1,86 +1,109 @@
+const { compareSync } = require('bcrypt');
 const pool = require('../db/database');
 const controller = { };
 
 /***************     USUARIOS     ***************/
-controller.getUsuarios = async (req, res, next) => {
-    const usuarios = await pool.query('SELECT * from usuarios');
+controller.getUsuarios = (req, res, next) => {
+    pool.query('SELECT * FROM usuarios', (err, result) => {
+        if(err) console.log(err);
 
-    res.render('admin/usuarios', { usuarios });
-};
+        const usuarios = result;
+        res.render('admin/usuarios', { usuarios });
+    });
+}
 
-controller.deleteUsuarioById = async (req, res, next) => {
+controller.deleteUsuarioById = (req, res, next) => {
     const { id } = req.params;
 
-    await pool.query('DELETE from usuarios WHERE id_user = ?', id);
+    pool.query('DELETE FROM usuarios WHERE id_user = ?', id, (err, result) => {
+        if(err) console.log(err);
 
-    req.flash('SUCCESS', 'Usuario borrado correctamente');
-    res.redirect('/usuarios');
+        res.redirect('/usuarios');
+    });
 };
 
-controller.setAdminById = async (req, res, next) => {
+controller.setAdminById = (req, res, next) => {
     const { id } = req.params;
 
-    await pool.query('UPDATE usuarios SET admin=true WHERE id_user = ?', id);
+    pool.query('UPDATE usuarios SER admin = true WHERE id_user = ?', id, (err, result) => {
+        if(err) console.log(err);
 
-    res.redirect('/usuarios');
+        res.redirect('/usuarios');
+    });
 };
 
 controller.removeAdminById = async (req, res, next) => {
     const { id } = req.params;
 
-    await pool.query('UPDATE usuarios SET admin=false WHERE id_user = ?', id);
+    pool.query('UPDATE usuarios SET admin=false WHERE id_user = ?', id, (err, result) => {
+        if(err) console.log(err);
 
-    res.redirect('/usuarios');
+        res.redirect('/usuarios');
+    });
 };
 
 
 /***************     SKINS     ***************/
-controller.getSkins = async (req, res, next) => {
-    const skins = await pool.query('SELECT * from skins ORDER BY categoria');
+controller.getSkins = (req, res, next) => {
+    pool.query('SELECT * FROM skins ORDER BY categoria', (err, result) => {
+        if(err) console.log(err);
 
-    res.render('admin/skins', { skins });
+        const skins = result;
+        res.render('admin/skins', { skins });
+    });
 };
 
-controller.deleteSkinById = async (req, res, next) => {
+controller.deleteSkinById =  (req, res, next) => {
     const { id } = req.params;
 
-    await pool.query('DELETE from skins WHERE id_skin = ?', id);
+    pool.query('DELETE FROM skins WHERE id_skin = ?', id, (err) => {
+        if(err) console.log(err);
 
-    res.redirect('/skins');
+        res.redirect('/skins');
+    });
 };
 
-controller.getSkinToEdit = async (req, res, next) => {
+controller.getSkinToEdit = (req, res, next) => {
     const { id } = req.params;
-    const datosSkin = await pool.query('SELECT * from skins WHERE id_skin = ?', id);
 
-    // PASO AL CLIENTE UN OBJETO QUE CONTIENE LOS DATOS DE UNA SKIN EN CONCRETO.
-    res.render('admin/edit', { datos: datosSkin[0] });
+    pool.query('SELECT * FROM skins WHERE id_skin = ?', id, (err, result) => {
+        if(err) console.log(err);
+
+        const datosSkin = result[0];
+        // PASO AL CLIENTE UN OBJETO QUE CONTIENE LOS DATOS DE UNA SKIN EN CONCRETO.
+        res.render('admin/edit', { datos: datosSkin });
+    });
 };
 
-controller.editSkinById = async (req, res, next) => {
+controller.editSkinById = (req, res, next) => {
     const { id } = req.params;
     const { nombre, foto, precio, categoria, descripcion } = req.body;
     const updateSkin = {
         nombre, precio, foto, categoria, descripcion
     }
 
-    await pool.query('UPDATE skins SET ? WHERE id_skin = ?', [updateSkin, id]);
-    res.redirect('/skins');
+    pool.query('UPDATE skins SET ? WHERE id_skin = ?', [updateSkin, id], (err, result) => {
+        if(err) console.log(err);
+
+        res.redirect('/skins');
+    });
 };
 
-controller.formNewSkin = async (req, res, next) => {
+controller.formNewSkin = (req, res, next) => {
     res.render('admin/add');
 };
 
-controller.createNewSkin = async (req, res, next) => {
+controller.createNewSkin = (req, res, next) => {
     const { nombre, foto, precio, categoria, descripcion } = req.body;
     const newSkin = {
         nombre, precio, foto, categoria, descripcion
     }
 
-    await pool.query('INSERT INTO skins SET ?', [newSkin]);
+    pool.query('INSERT INTO skins SET ?', [newSkin], (err, result) => {
+        if(err) console.log(err);
  
-    res.redirect('/skins');
+        res.redirect('/skins');
+    });
 };
 
 
