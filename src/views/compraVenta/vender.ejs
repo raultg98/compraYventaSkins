@@ -2,19 +2,14 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container p-4">
-    <%- include('navbarAdmin.ejs')  %> 
-</div>
+<% if(admin){  %>
+    <div class="container p-3">
+        <%- include('../admin/navbarAdmin.ejs')  %> 
+    </div>
+<% } %> 
 
-<div class="container px-4">
-    <a href="/skins/add" class="btn btn-primary btn-block text-white col-12">
-        <i class="far fa-plus-square"></i>  AÑADIR UNA NUEVA SKIN 
-    </a>
-</div>
-
-<div class="container p-4">
+<div class="container">
     <div class="row">
-        
         <% skins.forEach(skin => { %>
             
             <div class="col-md-4 my-2">
@@ -22,29 +17,25 @@
                     <div class="card-header bg-dark text-white">
                         <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>
                     </div>
-
+        
                     <div class="card-body text-center">
                         <img src="<%= skin.foto %>" class="" style="width: 40%;">
                     
                         <h5 class=""> PRECIO: <%= skin.precio %>€ </h5>
-
+        
                         <div class="d-flex justify-content-around flex-wrap mt-3">
-                            <a href="/skins/delete/<%= skin.id_skin%>" class="btn btn-danger btn-block mx-2">
-                                <i class="fas fa-trash"></i> ELIMINAR
-                            </a>
-                        
-                            <a href="/skins/edit/<%= skin.id_skin%>" class="btn btn-warning btn-block mx-2 text-white">
-                                <i class="fas fa-pencil-alt"></i> EDITAR 
+                            <a href="/skins/vender/<%= skin.id_skin %>" class="btn btn-success btn-block mx-2">
+                                <i class="fas fa-money-bill-wave"></i> VENDER SKIN
                             </a>
                         </div>
                             
                     </div>
                 </div>
             </div>
-
+        
         <% }) %> 
-
     </div>
 </div>
+
 
 <%- include('../templates/footer.ejs') %> 

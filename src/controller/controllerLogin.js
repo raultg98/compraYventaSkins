@@ -48,43 +48,6 @@ controller.postLogin = async (req, res, next) => {
     }
 };
 
-// FUNCION QUE ME COMPRUEBA SI UN CORREO ESTA REGISTRADO O NO.
-function isUserRegister(correo, callback){
-    pool.query('SELECT correo FROM usuarios WHERE correo = ?', correo, (err, result, fields) => {
-        if(err){
-            console.log(err);
-        }else {
-            // CON RESULT.LENGTH COMPRUEBO SI LA CONSULTA TIENE DATOS.
-            if(!result.length){
-                callback(false);
-            }else{
-                callback(true);
-            }
-        }
-    });
-}
-
-function isContraseniaCorrecta(correo, contrasenia, callback){
-    pool.query('SELECT contrasenia FROM usuarios WHERE correo = ?', correo, (err, result) => {
-        if(err){
-            console.log(err);
-        }else {
-            if(!result.length){
-                console.log('ERROR: USUARIO NO REGISTRADO');
-                callback(false);
-            }else{
-                const contraseniaBD = result[0].contrasenia;
-
-                if(!bcrypt.compare(contraseniaBD, contrasenia)){
-                    callback(false);
-                }else {
-                    callback(true);
-                }
-            }
-        }
-    })
-}
-
 // /***************     REGISTER     ***************/
 controller.getRegister = (req, res, next) => {
     res.render('user/register', { errors: erroresRegister });
@@ -145,6 +108,43 @@ controller.postRegister = async (req, res, next) => {
             }
         });
     }
+}
+
+// FUNCION QUE ME COMPRUEBA SI UN CORREO ESTA REGISTRADO O NO.
+function isUserRegister(correo, callback){
+    pool.query('SELECT correo FROM usuarios WHERE correo = ?', correo, (err, result, fields) => {
+        if(err){
+            console.log(err);
+        }else {
+            // CON RESULT.LENGTH COMPRUEBO SI LA CONSULTA TIENE DATOS.
+            if(!result.length){
+                callback(false);
+            }else{
+                callback(true);
+            }
+        }
+    });
+}
+
+function isContraseniaCorrecta(correo, contrasenia, callback){
+    pool.query('SELECT contrasenia FROM usuarios WHERE correo = ?', correo, (err, result) => {
+        if(err){
+            console.log(err);
+        }else {
+            if(!result.length){
+                console.log('ERROR: USUARIO NO REGISTRADO');
+                callback(false);
+            }else{
+                const contraseniaBD = result[0].contrasenia;
+
+                if(!bcrypt.compare(contraseniaBD, contrasenia)){
+                    callback(false);
+                }else {
+                    callback(true);
+                }
+            }
+        }
+    })
 }
 
 module.exports = controller;

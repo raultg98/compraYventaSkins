@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // VARIABLES GLOBALES
 app.use((req, res, next) => {
+    // res.status(404).render('404');
     next();
 })
 
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 app.use(require('./routes/appRoutes'));
 app.use(require('./routes/adminRoutes'));
 app.use(require('./routes/loginRoutes'));
+app.use(require('./routes/venderComprarRoutes'));
 
 // ARCHIVOS ESTATICOS
 app.use(express.static(path.join(__dirname, 'public')));

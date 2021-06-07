@@ -1,0 +1,42 @@
+<%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
+
+<%- include('../templates/navbar.ejs') %> 
+
+<% if(admin){  %>
+    <div class="container p-3">
+        <%- include('../admin/navbarAdmin.ejs')  %> 
+    </div>
+<% } %> 
+
+<div class="container">
+    <div class="row">
+        <% ventas.forEach(venta => { %>
+            
+            <div class="col-md-4 my-2">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h5> <%= venta.categoria.toString().toUpperCase() %> - <%= venta.nombre %> </h5>
+                    </div>
+        
+                    <div class="card-body text-center">
+                        <img src="<%= venta.foto %>" class="" style="width: 40%;">
+                    
+                        <h5 class=""> PRECIO: <%= venta.precio %>€ </h5>
+        
+                        <h5 class="text-muted"><i> <%= venta.vendedor %>  </i></h5>
+                        <div class="d-flex justify-content-around flex-wrap mt-3">
+                            <a href="/skins/comprar/<%= venta.id_skin %>" class="btn btn-success btn-block mx-2">
+                                <i class="fas fa-money-bill-wave"></i> COMPRAR SKIN
+                            </a>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+        
+        <% }) %> 
+    </div>
+</div>
+
+
+<%- include('../templates/footer.ejs') %> 

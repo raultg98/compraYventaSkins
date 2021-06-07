@@ -10,7 +10,11 @@
         <div class="navbar-nav">
           <a class="nav-link" href="/comprar">COMPRAR</a>
           <a class="nav-link" href="/vender">VENDER</a>
-          <a class="nav-link" href="/usuarios"><i class="fas fa-user-cog"></i> ADMIN</a>
+          
+          <% if(admin){ %>
+            <a class="nav-link" href="/usuarios"><i class="fas fa-user-cog"></i> ADMIN</a>
+          <% } %> 
+          
           
         </div>
         
