@@ -1,33 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/inicio">
-            COMPRA Y VENTA
+        <a class="navbar-brand text-center" href="/inicio">
+            COMPRA Y VENTA <br> DE SKINS
         </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/comprar">COMPRAR</a>
-          <a class="nav-link" href="/vender">VENDER</a>
-          
-          <% if(admin){ %>
-            <a class="nav-link" href="/usuarios"><i class="fas fa-user-cog"></i> ADMIN</a>
-          <% } %> 
-          
-          
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/comprar">COMPRAR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/vender">VENDER</a>
+          </li>
+          <li class="nav-item">
+
+            <% if(admin){ %>
+              <a class="nav-link" href="/usuarios"><i class="fas fa-user-cog"></i> ADMIN</a>
+            <% } %> 
+
+          </li>
+        </ul>
+
+        <div class="navbar-right">
+          <ul class="nav">
+            <li class="nav-item mx-1">
+              <a href="/dinero" class="btn btn-warning text-success nav-link fw-bold"> <%= dinero %> $ </a>
+            </li>
+            <!-- PERFIL -->
+            <li class="nav-item mx-1">
+              <a href="/user" class="btn btn-primary nav-link"><i class="fas fa-user"></i></a>
+            </li class="nav-item">
+
+            <!-- CARRITO -->
+            <li class="nav-item mx-1">
+              <a href="/carrito" class="btn btn-success nav-link"><i class="fas fa-shopping-cart"></i></a>
+            </li>
+
+            <!-- LOGOUT -->
+            <li class="nav-item mx-1">
+              <a href="/login" class="btn btn-danger nav-link"><i class="fas fa-sign-out-alt"></i></a>
+            </li>
+          </ul>
         </div>
         
       </div>
     </div>
-
-    <div class="d-flex mx-4">
-        <a href="login" class="mx-4">
-            <i class="fas fa-user"></i>
-        </a>
-        
-        <a class="mx-4">
-            <i class="fas fa-shopping-cart"></i>
-        </a>
-    </div>
   </nav>
+  

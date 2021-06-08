@@ -1,20 +1,14 @@
 const { Router } = require('express');
-const router = Router();
+const pool = require('../db/database');
 
+const router = Router();
 
 /*************    RAIZ    *************/
 router.get('/', (req, res, next)=>{
     if(req.session.usuario == null){
         res.redirect('/login');
     }else{
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
-        res.render('index', { admin });
+        res.redirect('/inicio');
     }
 });
 
@@ -33,7 +27,13 @@ router.get('/inicio', (req, res, next)=>{
         }else{
             admin = false;
         }
-        res.render('index', { usuario, admin });
+
+        pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+            if(err) console.log(err);
+
+            const dinero = result[0].dinero;
+            res.render('index', { usuario, admin, dinero });
+        });
     }
 });
 

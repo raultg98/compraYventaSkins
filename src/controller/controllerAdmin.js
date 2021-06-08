@@ -1,6 +1,7 @@
 const pool = require('../db/database');
 const controller = { };
 
+
 /***************     USUARIOS     ***************/
 controller.getUsuarios = (req, res, next) => {
     pool.query('SELECT * FROM usuarios', (err, result) => {
@@ -10,15 +11,32 @@ controller.getUsuarios = (req, res, next) => {
             res.redirect('/login');
         }else{
             const usuarios = result;
-            const usuario = req.session.usuario.split('@');
+            const usuarioAdmin = req.session.usuario.split('@');
             let admin;
-            if(usuario[0] === 'admin'){
+            if(usuarioAdmin[0] === 'admin'){
                 admin = true;
             }else{
                 admin = false;
             }
-            res.render('admin/usuarios', { usuarios, admin });
+
+            const usuario = req.session.usuario;
+            dinero(usuario, (dineroUsuario) => {
+                const dinero = dineroUsuario;
+                
+                res.render('admin/usuarios', { usuarios, admin, dinero });
+            });
+
+            
         }
+    });
+}
+
+function dinero(usuario, callback){
+    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+        if(err) console.log(err);
+    
+        const dinero = result[0].dinero;
+        callback(dinero);
     });
 }
 
@@ -42,7 +60,7 @@ controller.setAdminById = (req, res, next) => {
     if(req.session.usuario == null){
         res.redirect('/login');
     }else {
-        pool.query('UPDATE usuarios SER admin = true WHERE id_user = ?', id, (err, result) => {
+        pool.query('UPDATE usuarios SET admin = true WHERE id_user = ?', id, (err, result) => {
             if(err) console.log(err);
     
             res.redirect('/usuarios');
@@ -56,7 +74,7 @@ controller.removeAdminById = async (req, res, next) => {
     if(req.session.usuario == null){
         res.redirect('/login');
     }else {
-        pool.query('UPDATE usuarios SET admin=false WHERE id_user = ?', id, (err, result) => {
+        pool.query('UPDATE usuarios SET admin = false WHERE id_user = ?', id, (err, result) => {
             if(err) console.log(err);
     
             res.redirect('/usuarios');
@@ -74,14 +92,20 @@ controller.getSkins = (req, res, next) => {
             if(err) console.log(err);
     
             const skins = result;
-            const usuario = req.session.usuario.split('@');
+            const usuarioAdmin = req.session.usuario.split('@');
             let admin;
-            if(usuario[0] === 'admin'){
+            if(usuarioAdmin[0] === 'admin'){
                 admin = true;
             }else{
                 admin = false;
             }
-            res.render('admin/skins', { skins, admin });
+
+            const usuario = req.session.usuario;
+            dinero(usuario, (dineroUsuario) => {
+                const dinero = dineroUsuario;
+                
+                res.render('admin/skins', { skins, admin, dinero });
+            });
         });
     }
 };
@@ -110,15 +134,21 @@ controller.getSkinToEdit = (req, res, next) => {
             if(err) console.log(err);
     
             const datosSkin = result[0];
-            const usuario = req.session.usuario.split('@');
+            const usuarioAdmin = req.session.usuario.split('@');
             let admin;
-            if(usuario[0] === 'admin'){
+            if(usuarioAdmin[0] === 'admin'){
                 admin = true;
             }else{
                 admin = false;
             }
-            // PASO AL CLIENTE UN OBJETO QUE CONTIENE LOS DATOS DE UNA SKIN EN CONCRETO.
-            res.render('admin/edit', { datos: datosSkin, admin });
+            
+            const usuario = req.session.usuario;
+            dinero(usuario, (dineroUsuario) => {
+                const dinero = dineroUsuario;
+                
+                res.render('admin/edit', { datos: datosSkin, admin, dinero });
+            });
+            
         });
     }
 };
@@ -145,14 +175,20 @@ controller.formNewSkin = (req, res, next) => {
     if(req.session.usuario == null){
         res.redirect('/login');
     }else {
-        const usuario = req.session.usuario.split('@');
+        const usuarioAdmin = req.session.usuario.split('@');
         let admin;
-        if(usuario[0] === 'admin'){
+        if(usuarioAdmin[0] === 'admin'){
             admin = true;
         }else{
             admin = false;
         }
-        res.render('admin/add', { admin });
+
+        const usuario = req.session.usuario;
+        dinero(usuario, (dineroUsuario) => {
+            const dinero = dineroUsuario;
+            
+            res.render('admin/add', { admin, dinero });
+        });
     }
 };
 

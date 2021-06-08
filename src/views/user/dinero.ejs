@@ -1,0 +1,56 @@
+<%- include('../templates/head.ejs', {titulo: 'TITULO'}) %>
+
+<%- include('../templates/navbar.ejs') %> 
+
+<% if(admin){  %>
+    <div class="container p-3">
+        <%- include('../admin/navbarAdmin.ejs')  %> 
+    </div>
+<% } %> 
+
+<div class="container p-3">
+        <div class="">
+            <h1>1. DINERO: <%= dinero %> $</h1>
+
+            <h1>2.  AÑADIR FONDOS </span></h1> 
+
+            <h4>DINERO AÑADIR: <span id="nuevoDinero"></span> $</h4>
+
+            <form action="/dinero" method="POST" class="row g-3">
+                <div class="col-4" id="boton20">
+                    <p class="btn btn-primary btn-block form-control"> 20 $</p>
+                </div>
+
+                <div class="col-4" id="boton40">
+                    <p class="btn btn-primary btn-block form-control"> 40 $</p>
+                </div>
+
+                <div class="col-4" id="boton60">
+                    <p class="btn btn-primary btn-block form-control"> 60 $</p>
+                </div>
+
+                <div class="col-12">
+                    <input type="number" class="form-control" placeholder="OTRA CANTIDAD">
+                </div>
+
+                <input type="text" name="dinero" id="dineroServer" hidden>
+
+                <div class="col-6">
+                    <button type="submit" class="btn btn-outline-primary btn-block form-control" id="botonEnviar">
+                        AÑADIR FONDOS
+                    </button>
+                </div>
+
+                <div class="col-6" id="resetear">
+                    <p class="btn btn-outline-danger btn-block form-control">
+                        RESETEAR
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/dineroBotones.js"></script>
+
+<%- include('../templates/footer.ejs') %> 

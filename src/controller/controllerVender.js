@@ -16,9 +16,24 @@ controller.getSkins = (req, res, next) => {
             }else{
                 admin = false;
             }
-            res.render('compraVenta/vender', { skins, admin });
+
+            const usuario = req.session.usuario;
+            dinero(usuario, (dineroUsuario) => {
+                const dinero = dineroUsuario;
+                
+                res.render('compraVenta/vender', { skins, admin, dinero });
+            });
         });
     }
+}
+
+function dinero(usuario, callback){
+    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+        if(err) console.log(err);
+    
+        const dinero = result[0].dinero;
+        callback(dinero);
+    });
 }
 
 controller.venderSkin = (req, res, next) => {
@@ -38,7 +53,7 @@ controller.venderSkin = (req, res, next) => {
             }
 
             // HACER EL INSERT 
-            pool.query('INSERT INTO ventas SET ?', [venta], (err) => {
+            pool.query('INSERT INTO stock SET ?', [venta], (err) => {
                 if(err) console.log(err);
 
                 res.redirect('/vender');

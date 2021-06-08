@@ -9,6 +9,8 @@ const expReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
 /***************     LOGIN     ***************/
 controller.getLogin = (req, res, next) => {
+    req.session.usuario = null;
+
     res.render('user/login', { errors: erroresLogin });
 
     erroresLogin = [];
@@ -21,6 +23,7 @@ controller.postLogin = async (req, res, next) => {
     if(!expReg.test(correo) || contrasenia.length < 3){
         erroresLogin.push({ text: 'EL CORREO O LA CONTRASEÑA NO SON VALIDOS'});
         req.session.usuario = null;
+
         res.redirect('/login');
     }else {
         // TENEMOS QUE COMPROBAR SI EL CORREO ESTA REGISTRADO.
@@ -28,6 +31,7 @@ controller.postLogin = async (req, res, next) => {
             if(!existe){
                 erroresLogin.push({ text: 'EL USUARIO NO ESTA REGISTRADO' });
                 req.session.usuario = null;
+
                 res.redirect('/login');
             }else {
                 // TENGO QUE OBTENER LA CONTRASEÑA Y COMPROBAR SI ES IGUAL A LA QUE ME HAN PASADO
@@ -35,6 +39,7 @@ controller.postLogin = async (req, res, next) => {
                     if(!correcta){
                         erroresLogin.push({ text: 'LA CONTRASEÑA NO COINCIDE' });
                         req.session.usuario = null;
+
                         res.redirect('/login');
                     }else {
                         req.session.usuario = correo;
@@ -50,6 +55,8 @@ controller.postLogin = async (req, res, next) => {
 
 // /***************     REGISTER     ***************/
 controller.getRegister = (req, res, next) => {
+    req.session.usuario = null;
+
     res.render('user/register', { errors: erroresRegister });
     // RESETEO LOS ERRORES.
     erroresRegister = [];
@@ -57,7 +64,8 @@ controller.getRegister = (req, res, next) => {
 
 controller.postRegister = async (req, res, next) => {
     const { nombre, apellidos, correo, contrasenia, contrasenia2 } = req.body;
-
+    req.session.usuario = null;
+    
     // HACER VALIDACIONES.
     if(nombre.length <= 3){
         erroresRegister.push({text: 'Nombre.length <= 3'});
@@ -89,25 +97,54 @@ controller.postRegister = async (req, res, next) => {
                 res.redirect('/register');
             }else{
                 const contraEncriptada = bcrypt.hash(contrasenia, 10);
-
-                const registerUser = {
-                    nombre,
-                    apellidos, 
-                    correo, 
-                    contrasenia: contraEncriptada, 
-                    admin: false
-                }
-
-                pool.query('INSERT INTO usuarios SET ?', [registerUser], (err, result) => {
-                    if(err){
-                        console.log(err);
+                
+                let resgisterUser;
+                existenUsuarios((existen) => {
+                    if(!existen){
+                        registerUser = {
+                            nombre,
+                            apellidos, 
+                            correo, 
+                            contrasenia: contraEncriptada, 
+                            dinero: 0,
+                            admin: true
+                        }
                     }else{
-                        res.redirect('/login');
+                        registerUser = {
+                            nombre,
+                            apellidos, 
+                            correo, 
+                            contrasenia: contraEncriptada, 
+                            dinero: 0,
+                            admin: false
+                        }
                     }
-                });
+
+                    pool.query('INSERT INTO usuarios SET ?', [registerUser], (err, result) => {
+                        if(err){
+                            console.log(err);
+                        }else{
+                            res.redirect('/login');
+                        }
+                    });
+                }); 
             }
         });
     }
+}
+
+function existenUsuarios(callback){
+    pool.query('SELECT * FROM usuarios', (err, result) => {
+        if(err) {
+            console.log(err);
+        }else{  
+            if(!result.length){
+                callback(false);
+            }else {
+                callback(true);
+            }
+        }
+    })
 }
 
 // FUNCION QUE ME COMPRUEBA SI UN CORREO ESTA REGISTRADO O NO.
