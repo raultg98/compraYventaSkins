@@ -27,15 +27,6 @@ controller.getSkins = (req, res, next) => {
     }
 }
 
-function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
-        if(err) console.log(err);
-    
-        const dinero = result[0].dinero;
-        callback(dinero);
-    });
-}
-
 controller.venderSkin = (req, res, next) => {
     if(req.session.usuario == null){
         res.redirect('/login');
@@ -60,6 +51,15 @@ controller.venderSkin = (req, res, next) => {
             })
         });
     }
+}
+
+function dinero(usuario, callback){
+    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+        if(err) console.log(err);
+    
+        const dinero = result[0].dinero;
+        callback(dinero);
+    });
 }
 
 module.exports = controller;

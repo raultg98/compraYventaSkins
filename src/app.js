@@ -37,6 +37,7 @@ app.use(require('./routes/adminRoutes'));
 app.use(require('./routes/loginRoutes'));
 app.use(require('./routes/venderComprarRoutes'));
 app.use(require('./routes/dineroRoutes'));
+app.use(require('./routes/carritoRoutes'));
 
 // ARCHIVOS ESTATICOS
 app.use(express.static(path.join(__dirname, 'public')));

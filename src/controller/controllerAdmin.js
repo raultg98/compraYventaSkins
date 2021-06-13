@@ -36,6 +36,7 @@ function dinero(usuario, callback){
         if(err) console.log(err);
     
         const dinero = result[0].dinero;
+        
         callback(dinero);
     });
 }

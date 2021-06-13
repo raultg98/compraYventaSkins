@@ -1,16 +1,28 @@
 const { Router } = require('express');
 const controllerVender = require('../controller/controllerVender');
 const controllerComprar = require('../controller/controllerComprar');
+const controllerAnuncios = require('../controller/controllerAnuncios');
 const router = Router();
 
-/*************    COMPRAR    *************/
-router.get('/comprar', controllerComprar.getComprar);
-
-
-
 /*************    VENDER    *************/
+// SELECT * FROM SKINS
 router.get('/vender', controllerVender.getSkins);
 
-router.get('/skins/vender/:id', controllerVender.venderSkin);
+// INSERT INTO STOCK
+router.get('/vender/:id', controllerVender.venderSkin);
+
+/*************    COMPRAR    *************/
+// SELECT * FROM STOCK
+router.get('/comprar', controllerComprar.getComprar);
+
+// INSERT INTO CARRITO, EL ID ES EL DEL STOCK
+router.get('/comprar/:id', controllerComprar.comprarSkinById);
+
+/*************    ANUNCIOS    *************/
+// SELECT * FROM CARRITO
+router.get('/anuncios/skinsUser', controllerAnuncios.getSkins);
+
+// DELETE FROM CARRITO WHERE id_carrito = id;
+router.get('/anuncios/delete/:id', controllerAnuncios.deleteAnuncioById);
 
 module.exports = router;

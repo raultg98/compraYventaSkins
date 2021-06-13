@@ -36,12 +36,12 @@ resetear.addEventListener('click', (e) => {
 
 botonEnviar.addEventListener('click', (e) => {
     dineroServer.value = totalDineroBotones;
-    totalDinero = 0;
+    totalDineroBotones = 0;
 });
 
 input.addEventListener('change', (e) => {
     const dinero = e.target.value;
-    totalDinero = 0;
     nuevoDinero.innerText = dinero;
+    totalDineroBotones = dinero;
 });
 
