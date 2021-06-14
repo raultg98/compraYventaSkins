@@ -7,14 +7,7 @@ controller.getSkins = (req, res, next) => {
         res.redirect('/login');
     }else{
         const usuario = req.session.usuario;
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
-            
+         
         // OBTENER TODAS LAS SKINS QUE TIENE UN USUARIO A LA VENTA
         pool.query('SELECT id_user FROM usuarios WHERE correo = ?', usuario, (err1, result1) => {
             if(err1) console.log(err1);
@@ -26,11 +19,12 @@ controller.getSkins = (req, res, next) => {
 
                 const skins = result;
             
-                dinero(usuario, (dineroUsuario) => {
+                dinero(usuario, (dineroUsuario, adminUsuario) => {
                     const dinero = dineroUsuario;
-
+                    const admin = adminUsuario;
+                    
                     res.render('user/anuncios', { skins, admin, dinero });
-                })
+                });
             });
         });
     }
@@ -51,11 +45,16 @@ controller.deleteAnuncioById = (req, res, next) => {
 }
 
 function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+    pool.query('SELECT dinero, admin FROM usuarios WHERE correo = ?', usuario, (err, result) => {
         if(err) console.log(err);
     
         const dinero = result[0].dinero;
-        callback(dinero);
+
+        if(result[0].admin == 1){
+            callback(dinero, true);
+        }else{
+            callback(dinero, false);
+        }
     });
 }
 

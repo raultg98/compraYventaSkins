@@ -9,17 +9,11 @@ controller.getSkins = (req, res, next) => {
             if(err) console.log(err);
     
             const skins = result;
-            const usuarioAdmin = req.session.usuario.split('@');
-            let admin;
-            if(usuarioAdmin[0] === 'admin'){
-                admin = true;
-            }else{
-                admin = false;
-            }
 
             const usuario = req.session.usuario;
-            dinero(usuario, (dineroUsuario) => {
+            dinero(usuario, (dineroUsuario, adminUsuario) => {
                 const dinero = dineroUsuario;
+                const admin = adminUsuario;
                 
                 res.render('compraVenta/vender', { skins, admin, dinero });
             });
@@ -54,11 +48,16 @@ controller.venderSkin = (req, res, next) => {
 }
 
 function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+    pool.query('SELECT dinero, admin FROM usuarios WHERE correo = ?', usuario, (err, result) => {
         if(err) console.log(err);
     
         const dinero = result[0].dinero;
-        callback(dinero);
+
+        if(result[0].admin == 1){
+            callback(dinero, true);
+        }else{
+            callback(dinero, false);
+        }
     });
 }
 

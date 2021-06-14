@@ -1,29 +1,35 @@
 const { Router } = require('express');
-const controller = require('../controller/controllerAdmin');
+const controllerUsuarios = require('../controller/controllerAdminUsuarios');
+const controllerSkins = require('../controller/controllerAdminSkins');
+const controllerComprar = require('../controller/controllerAdminCompras');
 
 const router = Router();
 
 /***************     USUARIOS     ***************/
-router.get('/usuarios', controller.getUsuarios);
+router.get('/admin/usuarios', controllerUsuarios.getUsuarios);
 
-router.get('/usuarios/delete/:id', controller.deleteUsuarioById);
+router.get('/admin/usuarios/delete/:id', controllerUsuarios.deleteUsuarioById);
 
-router.get('/usuarios/setAdmin/:id', controller.setAdminById);
+router.get('/admin/usuarios/setAdmin/:id', controllerUsuarios.setAdminById);
 
-router.get('/usuarios/removeAdmin/:id', controller.removeAdminById);
+router.get('/admin/usuarios/removeAdmin/:id', controllerUsuarios.removeAdminById);
 
 
-// /***************     SKINS     ***************/
-router.get('/skins', controller.getSkins);
+/***************     SKINS     ***************/
+router.get('/admin/skins', controllerSkins.getSkins);
 
-router.get('/skins/delete/:id', controller.deleteSkinById);
+router.get('/admin/skins/delete/:id', controllerSkins.deleteSkinById);
 
-router.get('/skins/edit/:id', controller.getSkinToEdit);
+router.get('/admin/skins/edit/:id', controllerSkins.getSkinToEdit);
 
-router.post('/skins/edit/:id', controller.editSkinById);
+router.post('/admin/skins/edit/:id', controllerSkins.editSkinById);
 
-router.get('/skins/add', controller.formNewSkin);
+router.get('/admin/skins/add', controllerSkins.formNewSkin);
 
-router.post('/skins/add', controller.createNewSkin);
+router.post('/admin/skins/add', controllerSkins.createNewSkin);
+
+
+/***************     COMPRAS     ***************/
+router.get('/admin/compras', controllerComprar.getAdminCompras);
 
 module.exports = router;

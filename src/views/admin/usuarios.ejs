@@ -2,7 +2,7 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container p-4">
+<div class="container-md p-md-4 p-sm-0">
     <%- include('navbarAdmin.ejs')  %> 
 </div>
 
@@ -24,13 +24,13 @@
                             <!-- COMPRUEBO QUE NO SEA EL SUPER ADMIN -->
                                 <!-- BOTON QUE ME BORRA AL USUARIO -->
                             <div class="d-flex justify-content-center my-2">
-                                <a href="/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
+                                <a href="/admin/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
                                     Eliminar Usuario
                                 </a>
                             </div>
 
                             <div class="d-flex justify-content-center">
-                                <a href="/usuarios/setAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
+                                <a href="/admin/usuarios/setAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
                                     Convertir Admin
                                 </a>
                             </div>
@@ -50,13 +50,13 @@
                             <% if(usuario.id_user !== 1){ %>
 
                                 <div class="d-flex justify-content-center my-2">
-                                    <a href="/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
+                                    <a href="/admin/usuarios/delete/<%= usuario.id_user %>" class="btn btn-danger col-12">
                                         Eliminar Usuario
                                     </a>
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <a href="/usuarios/removeAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
+                                    <a href="/admin/usuarios/removeAdmin/<%= usuario.id_user %>" class="btn btn-warning col-12 text-white">
                                         Quitar Admin
                                     </a>
                                 </div> 

@@ -2,88 +2,6 @@ const pool = require('../db/database');
 const controller = { };
 
 
-/***************     USUARIOS     ***************/
-controller.getUsuarios = (req, res, next) => {
-    pool.query('SELECT * FROM usuarios', (err, result) => {
-        if(err) console.log(err);
-
-        if(req.session.usuario == null){
-            res.redirect('/login');
-        }else{
-            const usuarios = result;
-            const usuarioAdmin = req.session.usuario.split('@');
-            let admin;
-            if(usuarioAdmin[0] === 'admin'){
-                admin = true;
-            }else{
-                admin = false;
-            }
-
-            const usuario = req.session.usuario;
-            dinero(usuario, (dineroUsuario) => {
-                const dinero = dineroUsuario;
-                
-                res.render('admin/usuarios', { usuarios, admin, dinero });
-            });
-
-            
-        }
-    });
-}
-
-function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
-        if(err) console.log(err);
-    
-        const dinero = result[0].dinero;
-        
-        callback(dinero);
-    });
-}
-
-controller.deleteUsuarioById = (req, res, next) => {
-    const { id } = req.params;
-
-    if(req.session.usuario == null){
-        res.redirect('/login');
-    }else {
-        pool.query('DELETE FROM usuarios WHERE id_user = ?', id, (err, result) => {
-            if(err) console.log(err);
-    
-            res.redirect('/usuarios');
-        });
-    }
-};
-
-controller.setAdminById = (req, res, next) => {
-    const { id } = req.params;
-
-    if(req.session.usuario == null){
-        res.redirect('/login');
-    }else {
-        pool.query('UPDATE usuarios SET admin = true WHERE id_user = ?', id, (err, result) => {
-            if(err) console.log(err);
-    
-            res.redirect('/usuarios');
-        });
-    }
-};
-
-controller.removeAdminById = async (req, res, next) => {
-    const { id } = req.params;
-
-    if(req.session.usuario == null){
-        res.redirect('/login');
-    }else {
-        pool.query('UPDATE usuarios SET admin = false WHERE id_user = ?', id, (err, result) => {
-            if(err) console.log(err);
-    
-            res.redirect('/usuarios');
-        });
-    }
-};
-
-
 /***************     SKINS     ***************/
 controller.getSkins = (req, res, next) => {
     if(req.session.usuario == null){
@@ -120,7 +38,7 @@ controller.deleteSkinById =  (req, res, next) => {
         pool.query('DELETE FROM skins WHERE id_skin = ?', id, (err) => {
             if(err) console.log(err);
     
-            res.redirect('/skins');
+            res.redirect('/admin/skins');
         });
     }
 };
@@ -135,21 +53,14 @@ controller.getSkinToEdit = (req, res, next) => {
             if(err) console.log(err);
     
             const datosSkin = result[0];
-            const usuarioAdmin = req.session.usuario.split('@');
-            let admin;
-            if(usuarioAdmin[0] === 'admin'){
-                admin = true;
-            }else{
-                admin = false;
-            }
-            
             const usuario = req.session.usuario;
-            dinero(usuario, (dineroUsuario) => {
+
+            dinero(usuario, (dineroUsuario, adminUsuario) => {
                 const dinero = dineroUsuario;
+                const admin = adminUsuario;
                 
                 res.render('admin/edit', { datos: datosSkin, admin, dinero });
             });
-            
         });
     }
 };
@@ -167,7 +78,7 @@ controller.editSkinById = (req, res, next) => {
         pool.query('UPDATE skins SET ? WHERE id_skin = ?', [updateSkin, id], (err, result) => {
             if(err) console.log(err);
 
-            res.redirect('/skins');
+            res.redirect('/admin/skins');
         });
     }
 };
@@ -176,17 +87,11 @@ controller.formNewSkin = (req, res, next) => {
     if(req.session.usuario == null){
         res.redirect('/login');
     }else {
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
-
         const usuario = req.session.usuario;
-        dinero(usuario, (dineroUsuario) => {
+
+        dinero(usuario, (dineroUsuario, adminUsuario) => {
             const dinero = dineroUsuario;
+            const admin = adminUsuario;
             
             res.render('admin/add', { admin, dinero });
         });
@@ -205,10 +110,24 @@ controller.createNewSkin = (req, res, next) => {
         pool.query('INSERT INTO skins SET ?', [newSkin], (err, result) => {
             if(err) console.log(err);
      
-            res.redirect('/skins');
+            res.redirect('/admin/skins');
         });
     }
 };
 
+
+function dinero(usuario, callback){
+    pool.query('SELECT dinero, admin FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+        if(err) console.log(err);
+    
+        const dinero = result[0].dinero;
+
+        if(result[0].admin == 1){
+            callback(dinero, true);
+        }else{
+            callback(dinero, false);
+        }
+    });
+}
 
 module.exports = controller;

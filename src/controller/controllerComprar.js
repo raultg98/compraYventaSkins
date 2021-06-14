@@ -8,13 +8,6 @@ controller.getComprar = (req, res, next) => {
         res.redirect('/login');
     }else{
         const usuario = req.session.usuario;
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
 
         // OBTENGO EL ID DEL USUARIO QUE ESTA UTILIZANDO LA WEB
         pool.query('SELECT id_user FROM usuarios WHERE correo = ?', usuario, (err, result1) => {
@@ -24,7 +17,7 @@ controller.getComprar = (req, res, next) => {
 
             // OBTENGO TODOS LOS DATOS DE LA SKIN PUESTA EN VENTA Y EL CORREO DEL USUARIO QUE LA PUSO EN VENTA. 
             // EL USUARIO QUE PONE UNA SKIN A LA VENTA NO LA VE EN LA RUTA '/COMPRAR'
-            pool.query('SELECT stock.*, usuarios.correo as vendedor, skins.* FROM stock INNER JOIN usuarios ON stock.id_vendedor = usuarios.id_user INNER JOIN skins ON stock.id_skin = skins.id_skin WHERE stock.id_vendedor != ? ORDER BY stock.id_vendedor', [id_user, admin], (err, result) => {
+            pool.query('SELECT stock.*, usuarios.correo as vendedor, skins.* FROM stock INNER JOIN usuarios ON stock.id_vendedor = usuarios.id_user INNER JOIN skins ON stock.id_skin = skins.id_skin WHERE stock.id_vendedor != ? ORDER BY stock.id_vendedor', id_user, (err, result) => {
                 if(err) console.error(err);
     
                 /**
@@ -32,15 +25,14 @@ controller.getComprar = (req, res, next) => {
                  * id_stock, id_skin, id_vendedor, 
                  */
                 const ventas = result;
-                // console.log(ventas);
     
-                dinero(usuario, (dineroUsuario) => {
+                dinero(usuario, (dineroUsuario, adminUsuario) => {
                     const dinero = dineroUsuario;
+                    const admin = adminUsuario;
                     
                     res.render('compraVenta/comprar', { ventas, admin, dinero, mensaje });
                     mensaje = [];
                 });
-                
             });
         })
     }
@@ -51,13 +43,6 @@ controller.comprarSkinById = (req, res, next) => {
         res.redirect('/login');
     }else{
         const usuario = req.session.usuario;
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
 
         // TENGO QUE COMPROBAR SI LA id_stock QUE RECIBO COMO PARAMETRO LO TENGO YA EN LA BASE DE DATOS.
 
@@ -99,11 +84,16 @@ controller.comprarSkinById = (req, res, next) => {
 
 
 function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+    pool.query('SELECT dinero, admin FROM usuarios WHERE correo = ?', usuario, (err, result) => {
         if(err) console.log(err);
     
         const dinero = result[0].dinero;
-        callback(dinero);
+
+        if(result[0].admin == 1){
+            callback(dinero, true);
+        }else{
+            callback(dinero, false);
+        }
     });
 }
 

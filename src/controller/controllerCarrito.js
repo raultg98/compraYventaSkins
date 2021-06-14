@@ -73,13 +73,6 @@ controller.pagar = (req, res, next) => {
         res.redirect('/login');
     }else { 
         const usuario = req.session.usuario;
-        const usuarioAdmin = req.session.usuario.split('@');
-        let admin;
-        if(usuarioAdmin[0] === 'admin'){
-            admin = true;
-        }else{
-            admin = false;
-        }
 
         pool.query('SELECT id_user FROM usuarios WHERE correo = ?', usuario, (err1, result1) => {
             if(err1) console.log(err1);
@@ -93,7 +86,8 @@ controller.pagar = (req, res, next) => {
                 // console.log(result);
 
                 const dineroTotal = result[0].dineroTotal;
-                dinero(usuario, (dineroUsuario) => {
+
+                dinero(usuario, (dineroUsuario, adminUsuario) => {
                     const dinero = dineroUsuario;
                     
                     if(dineroTotal <= dinero){
@@ -167,11 +161,16 @@ controller.pagar = (req, res, next) => {
 }
 
 function dinero(usuario, callback){
-    pool.query('SELECT dinero FROM usuarios WHERE correo = ?', usuario, (err, result) => {
+    pool.query('SELECT dinero, admin FROM usuarios WHERE correo = ?', usuario, (err, result) => {
         if(err) console.log(err);
     
         const dinero = result[0].dinero;
-        callback(dinero);
+
+        if(result[0].admin == 1){
+            callback(dinero, true);
+        }else{
+            callback(dinero, false);
+        }
     });
 }
 
