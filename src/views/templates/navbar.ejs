@@ -16,8 +16,26 @@
             <a class="nav-link" href="/vender">VENDER</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/anuncios/skinsUser">MIS ANUNCIOS</a>
+            <a class="nav-link" href="/about">ABOUT</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacto">CONTACTO</a>
+          </li>
+
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            USUARIO
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/usuario/anuncios">MIS ANUNCIOS</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/usuario/compras">MIS COMPRAS</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/usuario/ventas">MIS VENTAS</a></li>
+          </ul>
+        </li>
+
           <li class="nav-item">
 
             <% if(admin){ %>
@@ -29,13 +47,15 @@
 
         <div class="navbar-right">
           <ul class="nav">
+            <!-- PERFIL
+            <li class="nav-item mx-1">
+              <a href="/user" class="btn btn-primary nav-link"><i class="fas fa-user"></i></a>
+            </li class="nav-item"> -->
+
+            <!-- DINERO -->
             <li class="nav-item mx-1">
               <a href="/dinero" class="btn btn-warning text-success nav-link fw-bold"> <%= dinero %> $ </a>
             </li>
-            <!-- PERFIL -->
-            <li class="nav-item mx-1">
-              <a href="/user" class="btn btn-primary nav-link"><i class="fas fa-user"></i></a>
-            </li class="nav-item">
 
             <!-- CARRITO -->
             <li class="nav-item mx-1">

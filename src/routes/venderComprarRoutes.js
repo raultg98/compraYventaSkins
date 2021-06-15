@@ -20,9 +20,9 @@ router.get('/comprar/:id', controllerComprar.comprarSkinById);
 
 /*************    ANUNCIOS    *************/
 // SELECT * FROM CARRITO
-router.get('/anuncios/skinsUser', controllerAnuncios.getSkins);
+router.get('/usuario/anuncios', controllerAnuncios.getSkins);
 
 // DELETE FROM CARRITO WHERE id_carrito = id;
-router.get('/anuncios/delete/:id', controllerAnuncios.deleteAnuncioById);
+router.get('/usuario/anuncios/delete/:id', controllerAnuncios.deleteAnuncioById);
 
 module.exports = router;

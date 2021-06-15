@@ -1,0 +1,93 @@
+<%- include('./head.ejs', {titulo: 'TITULO'}) %>
+
+<%- include('./navbar.ejs') %> 
+
+<div class="container my-4  d-flex justify-content-center flex-column">
+    
+    <div class="row d-flex justify-content-center">
+        <h1 class="text-center">COMPRA Y VENTA <br> DE SKINS</h1>
+
+        <h3 class="text-center my-3">¿ QUIENES SOMOS Y A QUE NOS DEDICAMOS ? </h3>
+        <h5 class="col-12 text-center mb-3">
+            SOMOS UNA WEB QUE SE DEDICA A LA COMPRA Y VENTA DE SKINS DEL COUNTER-STRIKE: 
+            GLOBAL OFENSIVE <br> 
+        </h5>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h6>COMO PUEDE VENDER UNA SKIN: </h6>
+    
+            <ol>
+                <li>Tienes que estar REGISTRADO y tener INICIA LA SESION.</li>
+                <li>Dirigite a la pestaña de VENDER, ahi te saldran todas las skins que puedes vender</li>
+                <li>Una vez escogida la skin que quiero vender, le damos al boton de VENDER </li>
+                <li>Esta skin le saldra al resto de usuarios en ventana de COMPRAR y a nosotros nos saldra en MIS ANUNCIOS</li>
+                <li>Una vez que vendas la skin se te sumara el 90% del precio de la skin y esta se añadira a la ventana de MIS VENTAS</li>
+            </ol>
+        </div>
+    
+        <div class="col-md-6 col-sm-12">
+            <h6>COMO PUEDE COMPRAR UNA SKIN: </h6>
+    
+            <ol>
+                <li>Tienes que estar REGISTRADO y tener INICIA LA SESION.</li>
+                <li>Dirigite a la pestaña de COMPRAR, ahi te saldran todas las skins que estan a la venta</li>
+                <li>Una vez escogida la skin que quiero comprar, le damos al boton de AÑADIR AL CARRITO </li>
+                <li>Esta skin si vas al CARRITO te saldra junto al resto de skins que tienes seleccionadas para la compra</li>
+                <li>Si tienes dinero para compras las skins le puedes dar al boton de PAGAR, en caso de que no lo tengas tienes que meter dinero</li>
+                <li>Veras las skins que has comprado en la ventana de MIS COMPRAS</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="col-12 my-4">
+        <div class="accordion" id="acordeonAbout">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarOne" aria-expanded="false" aria-controls="colapsarOne">
+                        Quiero cambiar mi contraseña
+                    </button>
+                </h2>
+                <div id="colapsarOne" class="accordion-collapse collapse" aria-labelledby="headOne" data-bs-parent="#acordeonAbout">
+                    <div class="accordion-body">
+                        En breves estara disponible la opcion para poder modificar el perfil. 
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarTwo" aria-expanded="false" aria-controls="colapsarTwo">
+                        He perdido mi contraseña
+                    </button>
+                </h2>
+                <div id="colapsarTwo" class="accordion-collapse collapse" aria-labelledby="headTwo" data-bs-parent="#acordeonAbout">
+                    <div class="accordion-body">
+                        Ponte en contacto con nosotros, mediante nuestra pagina de contacto. Enviar un formulario con lo que te ha sucedido y tus datos de contacto
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarThree" aria-expanded="false" aria-controls="colapsarThree">
+                        Me han robado la cuenta
+                    </button>
+                </h2>
+                <div id="colapsarThree" class="accordion-collapse collapse" aria-labelledby="headThree" data-bs-parent="#acordeonAbout">
+                    <div class="accordion-body">
+                        Envia un ticket al soporte para bloquear de inmediato tu cuenta y que no puedan sacar el dinero de tu cuenta. 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+</div>
+
+<%- include('./footer.ejs') %> 
