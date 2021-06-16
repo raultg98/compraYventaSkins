@@ -3,72 +3,105 @@
 <%- include('../templates/navbar.ejs') %> 
 
 <div class="container p-3">
-        <h1>1. DINERO </h1>
 
-        <h4 class="mx-4"> DINERO ACTUAL: <span class="text-primary"> <%= dinero %> $ </span> </h4>
+    <div class="col-12 mt-3">
+        <% if(mensaje_error.length > 0){ %>
+          <% mensaje_error.forEach(msg => { %>
+      
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= msg.text %> 
+      
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+      
+          <% }) %> 
+        <% } %>
 
-        <h1>2.  AÑADIR FONDOS </h1> 
-
-        <div class="mx-md-4 mx-sm-0">
-            <h4>DINERO AÑADIR: <span id="nuevoDinero"class="text-primary"></span> </h4>
-
-            <form action="/dinero" method="POST" class="row g-3">
-                <div class="col-4" id="boton20">
-                    <p class="btn btn-outline-primary btn-block form-control"> 20 $</p>
-                </div>
-
-                <div class="col-4" id="boton40">
-                    <p class="btn btn-outline-primary btn-block form-control"> 40 $</p>
-                </div>
-
-                <div class="col-4" id="boton60">
-                    <p class="btn btn-outline-primary btn-block form-control"> 60 $</p>
-                </div>
-
-                <div class="col-12">
-                    <label for="otraCantidad" class="label-control fw-bold">Otra cantidad</label>
-                    <input type="number" class="form-control" placeholder="INGRESE OTRA CANTIDAD" id="otraCantidad">
-                </div>
-
-                <input type="text" name="dinero" id="dineroServer" hidden>
-
-                <div class="col-6">
-                    <button type="submit" class="btn btn-primary btn-block form-control" id="botonEnviar">
-                        AÑADIR FONDOS
-                    </button>
-                </div>
-
-                <div class="col-6" id="resetear">
-                    <p class="btn btn-danger btn-block form-control">
-                        RESETEAR
-                    </p>
-                </div>
-            </form>
-        </div>
+        <% if(mensaje_success.length > 0){ %>
+            <% mensaje_success.forEach(msg => { %>
         
-
-        <h1>3. RETIRAR FONDOS</h1>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= msg.text %> 
         
-        <div class="mx-md-4 mx-sm-0">
-            <form action="/dinero/retirar" method="POST">
-                <div class="col-12 my-3">
-                    <label for="dineroToWithdraw" class="label-control fw-bold">Cuando dinero deseas retirar</label>
-                    <input type="number" class="form-control" placeholder="Dinero que deseas retirar" id="dineroToWithdraw">
-                </div>
-
-                <input type="text" name="dineroRetirar" id="dineroRetirar" hidden>
-
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block form-control" id="botonRetirar">
-                        RETIRAR FONDOS
-                    </button>
-                </div>
-            </form>
-        </div>
-
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+        
+            <% }) %> 
+          <% } %>
     </div>
+
+    <h1>1. DINERO </h1>
+
+    <h4 class="mx-4"> DINERO ACTUAL: <span class="text-primary"> <%= dinero %> $ </span> </h4>
+
+    <h1>2.  AÑADIR FONDOS </h1> 
+
+    <div class="mx-md-4 mx-sm-0">
+        <h4>DINERO AÑADIR: <span id="nuevoDinero"class="text-primary"></span> </h4>
+
+        <form action="/dinero" method="POST" class="row g-3">
+            <div class="col-4" id="boton20">
+                <p class="btn btn-outline-primary btn-block form-control"> 20 $</p>
+            </div>
+
+            <div class="col-4" id="boton40">
+                <p class="btn btn-outline-primary btn-block form-control"> 40 $</p>
+            </div>
+
+            <div class="col-4" id="boton60">
+                <p class="btn btn-outline-primary btn-block form-control"> 60 $</p>
+            </div>
+
+            <div class="col-12">
+                <label for="otraCantidad" class="label-control fw-bold">Otra cantidad</label>
+                <input type="number" class="form-control" placeholder="INGRESE OTRA CANTIDAD" id="otraCantidad">
+            </div>
+
+            <input type="text" name="dinero" id="dineroServer" hidden>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary btn-block form-control" id="botonEnviar">
+                    AÑADIR FONDOS
+                </button>
+            </div>
+
+            <div class="col-6" id="resetear">
+                <p class="btn btn-danger btn-block form-control">
+                    RESETEAR
+                </p>
+            </div>
+        </form>
+    </div>
+    
+
+    <h1>3. RETIRAR FONDOS</h1>
+    
+    <div class="mx-md-4 mx-sm-0">
+        <h4>DINERO RETIRAR: <span id="mostrarRetirarDinero" class="text-primary"></span></h4>
+
+        <form action="/dinero/retirar" method="POST" class="row g-3">
+            <div class="col-12 my-3">
+                <label for="dineroToWithdraw" class="label-control fw-bold">Cuando dinero deseas retirar</label>
+                <input type="number" class="form-control" placeholder="Dinero que deseas retirar" id="dineroRetirar">
+            </div>
+
+            <input type="text" name="retirarDinero" id="retirarDineroServer" hidden>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary btn-block form-control" id="botonRetirar">
+                    RETIRAR FONDOS
+                </button>
+            </div>
+            <div class="col-6">
+                <p class="btn btn-danger btn-block form-control" id="resetearRetirada">
+                    RESETEAR
+                </p>
+            </div>
+        </form>
+    </div>
+
 </div>
 
-<script src="/js/dineroBotones.js"></script>
+<script src="/js/aniadirDinero.js"></script>
 
 <%- include('../templates/footer.ejs') %> 

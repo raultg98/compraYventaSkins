@@ -39,7 +39,7 @@ controller.deleteAnuncioById = (req, res, next) => {
         pool.query('DELETE FROM stock WHERE id_stock = ?', id, (err, result) => {
             if(err) console.log(err);
 
-            res.redirect('/anuncios/skinsUser');
+            res.redirect('/usuario/anuncios');
         });
     }
 }

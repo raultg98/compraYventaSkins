@@ -9,7 +9,6 @@ const botonEnviar = document.getElementById('botonEnviar');
 
 nuevoDinero.innerText = '0 $';
 
-
 const value20 = 20;
 const value40 = 40;
 const value60 = 60;
@@ -45,4 +44,30 @@ resetear.addEventListener('click', (e) => {
 botonEnviar.addEventListener('click', (e) => {
     dineroServer.value = totalDineroBotones;
     totalDineroBotones = 0;
+});
+
+const botonRetirar = document.getElementById('botonRetirar');
+const inputResetear = document.getElementById('dineroRetirar');
+const span = document.getElementById('mostrarRetirarDinero');
+const inputServer = document.getElementById('retirarDineroServer');
+const reseteaResetear = document.getElementById('resetearRetirada');
+
+let dineroRetirar = 0;
+
+span.innerText = '0 $';
+
+inputResetear.addEventListener('change', (e) => {
+    const dinero = parseInt(e.target.value);
+    dineroRetirar += dinero;
+    span.innerText = dineroRetirar +'$'
+});
+
+botonRetirar.addEventListener('click', (e) => {
+    inputServer.value = dineroRetirar;
+    dineroRetirar = 0;
+});
+
+reseteaResetear.addEventListener('click', (e) => {
+    dineroRetirar = 0;
+    span.innerText = dineroRetirar +'$';
 });
