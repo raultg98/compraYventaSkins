@@ -15,39 +15,60 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <h6>COMO PUEDE VENDER UNA SKIN: </h6>
+        <div class="col-md-6 col-sm-12 my-4">
+            <h6 class="fw-bold">COMO PUEDE VENDER UNA SKIN: </h6>
     
-            <ol>
-                <li>Tienes que estar REGISTRADO y tener INICIA LA SESION.</li>
-                <li>Dirigite a la pestaña de VENDER, ahi te saldran todas las skins que puedes vender</li>
-                <li>Una vez escogida la skin que quiero vender, le damos al boton de VENDER </li>
-                <li>Esta skin le saldra al resto de usuarios en ventana de COMPRAR y a nosotros nos saldra en MIS ANUNCIOS</li>
-                <li>Una vez que vendas la skin se te sumara el 90% del precio de la skin y esta se añadira a la ventana de MIS VENTAS</li>
+            <ol class="primeraListaOrdenada list-group list-group-numbered">
+                <li class="list-group-item">Tienes que estar <a href="/register">REGISTRADO</a> y tener <a href="/login">INICIADA LA SESION</a>.</li>
+                <li class="list-group-item">
+                    Dirigite a la pestaña de <a href="/vender">VENDER</a>, ahi te saldran todas las skins que puedes vender
+                </li>
+                <li class="list-group-item">Una vez escogida la skin que quiero vender, le damos al boton de 
+                    <span class="btn btn-success">
+                        <i class="fas fa-money-bill-wave"></i> PONER A LA VENTA
+                    </span> 
+                </li>
+                <li class="list-group-item">
+                    Esta skin le saldra al resto de usuarios en ventana de <a href="/comprar">COMPRAR</a>  y a nosotros nos 
+                    saldra en <a href="/usuario/anuncios">MIS ANUNCIOS</a>
+                </li>
+                <li class="list-group-item">
+                    Una vez que vendas la skin se te sumara el 90% del precio de la skin y esta se añadira a la ventana de 
+                    <a href="/usuario/ventas">MIS VENTAS</a> 
+                </li>
             </ol>
         </div>
     
-        <div class="col-md-6 col-sm-12">
-            <h6>COMO PUEDE COMPRAR UNA SKIN: </h6>
-    
-            <ol>
-                <li>Tienes que estar REGISTRADO y tener INICIA LA SESION.</li>
-                <li>Dirigite a la pestaña de COMPRAR, ahi te saldran todas las skins que estan a la venta</li>
-                <li>Una vez escogida la skin que quiero comprar, le damos al boton de AÑADIR AL CARRITO </li>
-                <li>Esta skin si vas al CARRITO te saldra junto al resto de skins que tienes seleccionadas para la compra</li>
-                <li>Si tienes dinero para compras las skins le puedes dar al boton de PAGAR, en caso de que no lo tengas tienes que meter dinero</li>
-                <li>Veras las skins que has comprado en la ventana de MIS COMPRAS</li>
+        <div class="col-md-6 col-sm-12 my-4">
+            <h6 class="fw-bold">COMO PUEDE COMPRAR UNA SKIN: </h6>
+            
+            <ol class="segundaListaOrdenada list-group list-group-numbered">
+                <li class="list-group-item">Tienes que estar <a href="/register">REGISTRADO</a>  y tener <a href="/login">INICIADA LA SESION</a>.</li>
+                <li class="list-group-item">Dirigite a la pestaña de <a href="/comprar">COMPRAR</a>, ahi te saldran todas las skins que estan a la venta</li>
+                <li class="list-group-item">
+                    Una vez escogida la skin que quiero comprar, le damos al boton de 
+                    <span class="btn btn-success"><i class="fas fa-money-bill-wave"></i> ANADIR AL CARRITO</span>
+                </li>
+                <li class="list-group-item">Esta skin si vas al <a href="/carrito">CARRITO</a> te saldra junto al resto de skins que tienes seleccionadas para la compra</li>
+                <li class="list-group-item">
+                    Si tienes dinero para compras las skins le puedes dar al boton de <span class="btn btn-success">PAGAR</span>, 
+                    en caso de que no lo tengas tienes que meter dinero aqui <a href="/dinero">DINERO</a>
+                </li>
+                <li class="list-group-item">Veras las skins que has comprado en la ventana de <a href="/usuario/compras">MIS COMPRAS</a></li>
             </ol>
         </div>
     </div>
 
 
     <div class="col-12 my-4">
+
+        <h4>PREGUNTAS FRECUENTES</h4>
+
         <div class="accordion" id="acordeonAbout">
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarOne" aria-expanded="false" aria-controls="colapsarOne">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarOne" aria-expanded="false" aria-controls="colapsarOne">
                         Quiero cambiar mi contraseña
                     </button>
                 </h2>
@@ -60,7 +81,7 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarTwo" aria-expanded="false" aria-controls="colapsarTwo">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarTwo" aria-expanded="false" aria-controls="colapsarTwo">
                         He perdido mi contraseña
                     </button>
                 </h2>
@@ -73,7 +94,7 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarThree" aria-expanded="false" aria-controls="colapsarThree">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#colapsarThree" aria-expanded="false" aria-controls="colapsarThree">
                         Me han robado la cuenta
                     </button>
                 </h2>

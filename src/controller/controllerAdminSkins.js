@@ -66,11 +66,13 @@ controller.getSkinToEdit = (req, res, next) => {
 };
 
 controller.editSkinById = (req, res, next) => {
+    // id ==>  id_skin
     const { id } = req.params;
     const { nombre, foto, precio, categoria, descripcion } = req.body;
     const updateSkin = {
         nombre, precio, foto, categoria, descripcion
     }
+    console.log(updateSkin);
 
     if(req.session.usuario == null){
         res.redirect('/login');

@@ -2,34 +2,39 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container">
-    <div class="row">
-        <% skins.forEach(skin => { %>
-            
-            <div class="col-md-4 my-2">
-                <div class="card">
-                    <div class="card-header bg-dark text-white">
-                        <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>
-                    </div>
-        
-                    <div class="card-body text-center">
-                        <img src="<%= skin.foto %>" class="" style="width: 40%;">
-                    
-                        <h5 class=""> PRECIO: <%= skin.precio %>€ </h5>
-        
-                        <div class="d-flex justify-content-around flex-wrap mt-3">
-                            <a href="/vender/<%= skin.id_skin %>" class="btn btn-success btn-block mx-2">
-                                <i class="fas fa-money-bill-wave"></i> PONER A LA VENTA
-                            </a>
+<% if(skins.length == 0) { %>
+    <div class="container text-center text-muted">
+        <h1>ACTUALMENTE NO HAY NINGUNA SKIN QUE SE PUEDA VENDER</h1>
+    </div>
+<% }else { %> 
+    <div class="container">
+        <div class="row">
+            <% skins.forEach(skin => { %>
+                
+                <div class="col-md-4 my-2">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>
                         </div>
-                            
+            
+                        <div class="card-body text-center">
+                            <img src="<%= skin.foto %>" class="" style="width: 40%;">
+                        
+                            <h5 class=""> PRECIO: <%= skin.precio %>€ </h5>
+            
+                            <div class="d-flex justify-content-around flex-wrap mt-3">
+                                <a href="/vender/<%= skin.id_skin %>" class="btn btn-success btn-block mx-2">
+                                    <i class="fas fa-money-bill-wave"></i> PONER A LA VENTA
+                                </a>
+                            </div>
+                                
+                        </div>
                     </div>
                 </div>
-            </div>
-        
-        <% }) %> 
+            
+            <% }) %> 
+        </div>
     </div>
-</div>
-
+<% } %>
 
 <%- include('../templates/footer.ejs') %> 

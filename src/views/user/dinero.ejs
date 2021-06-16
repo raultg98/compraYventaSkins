@@ -3,45 +3,69 @@
 <%- include('../templates/navbar.ejs') %> 
 
 <div class="container p-3">
-        <div class="">
-            <h1>1. DINERO: <%= dinero %> $</h1>
+        <h1>1. DINERO </h1>
 
-            <h1>2.  AÑADIR FONDOS </span></h1> 
+        <h4 class="mx-4"> DINERO ACTUAL: <span class="text-primary"> <%= dinero %> $ </span> </h4>
 
-            <h4>DINERO AÑADIR: <span id="nuevoDinero"></span> $</h4>
+        <h1>2.  AÑADIR FONDOS </h1> 
+
+        <div class="mx-md-4 mx-sm-0">
+            <h4>DINERO AÑADIR: <span id="nuevoDinero"class="text-primary"></span> </h4>
 
             <form action="/dinero" method="POST" class="row g-3">
                 <div class="col-4" id="boton20">
-                    <p class="btn btn-primary btn-block form-control"> 20 $</p>
+                    <p class="btn btn-outline-primary btn-block form-control"> 20 $</p>
                 </div>
 
                 <div class="col-4" id="boton40">
-                    <p class="btn btn-primary btn-block form-control"> 40 $</p>
+                    <p class="btn btn-outline-primary btn-block form-control"> 40 $</p>
                 </div>
 
                 <div class="col-4" id="boton60">
-                    <p class="btn btn-primary btn-block form-control"> 60 $</p>
+                    <p class="btn btn-outline-primary btn-block form-control"> 60 $</p>
                 </div>
 
                 <div class="col-12">
-                    <input type="number" class="form-control" placeholder="OTRA CANTIDAD">
+                    <label for="otraCantidad" class="label-control fw-bold">Otra cantidad</label>
+                    <input type="number" class="form-control" placeholder="INGRESE OTRA CANTIDAD" id="otraCantidad">
                 </div>
 
                 <input type="text" name="dinero" id="dineroServer" hidden>
 
                 <div class="col-6">
-                    <button type="submit" class="btn btn-outline-primary btn-block form-control" id="botonEnviar">
+                    <button type="submit" class="btn btn-primary btn-block form-control" id="botonEnviar">
                         AÑADIR FONDOS
                     </button>
                 </div>
 
                 <div class="col-6" id="resetear">
-                    <p class="btn btn-outline-danger btn-block form-control">
+                    <p class="btn btn-danger btn-block form-control">
                         RESETEAR
                     </p>
                 </div>
             </form>
         </div>
+        
+
+        <h1>3. RETIRAR FONDOS</h1>
+        
+        <div class="mx-md-4 mx-sm-0">
+            <form action="/dinero/retirar" method="POST">
+                <div class="col-12 my-3">
+                    <label for="dineroToWithdraw" class="label-control fw-bold">Cuando dinero deseas retirar</label>
+                    <input type="number" class="form-control" placeholder="Dinero que deseas retirar" id="dineroToWithdraw">
+                </div>
+
+                <input type="text" name="dineroRetirar" id="dineroRetirar" hidden>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block form-control" id="botonRetirar">
+                        RETIRAR FONDOS
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 

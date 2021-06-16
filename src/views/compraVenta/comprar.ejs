@@ -2,50 +2,55 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container">
-    <div class="row">
-
-        <div class="col-12 mt-3">
-            <% if(mensaje.length > 0){ %>
-              <% mensaje.forEach(msg => { %>
-          
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <%= msg.text %> 
-          
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-          
-              <% }) %> 
-            <% } %>
-        </div>
-
-        <% ventas.forEach(venta => { %>
-            
-            <div class="col-md-4 my-2">
-                <div class="card">
-                    <div class="card-header bg-dark text-white">
-                        <h5> <%= venta.categoria.toString().toUpperCase() %> - <%= venta.nombre %> </h5>
-                    </div>
-        
-                    <div class="card-body text-center">
-                        <img src="<%= venta.foto %>" class="" style="width: 40%;">
-                    
-                        <h5 class=""> PRECIO: <%= venta.precio %>€ </h5>
-        
-                        <h5 class="text-muted"><i> <%= venta.vendedor %>  </i></h5>
-                        <div class="d-flex justify-content-around flex-wrap mt-3">
-                            <a href="/comprar/<%= venta.id_stock %>" class="btn btn-success btn-block mx-2">
-                                <i class="fas fa-money-bill-wave"></i> COMPRAR SKIN 
-                            </a>
-                        </div>
-                            
-                    </div>
-                </div>
-            </div>
-        
-        <% }) %> 
+<% if(ventas.length == 0) { %>
+    <div class="container text-center text-muted">
+        <h1>ACTUALMENTE NO HAY NINGUNA SKIN A LA VENTA</h1>
     </div>
-</div>
-
+<% }else { %>
+    <div class="container">
+        <div class="row">
+    
+            <div class="col-12 mt-3">
+                <% if(mensaje.length > 0){ %>
+                  <% mensaje.forEach(msg => { %>
+              
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= msg.text %> 
+              
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+              
+                  <% }) %> 
+                <% } %>
+            </div>
+    
+            <% ventas.forEach(venta => { %>
+                
+                <div class="col-md-4 my-2">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h5> <%= venta.categoria.toString().toUpperCase() %> - <%= venta.nombre %> </h5>
+                        </div>
+            
+                        <div class="card-body text-center">
+                            <img src="<%= venta.foto %>" class="" style="width: 40%;">
+                        
+                            <h5 class=""> PRECIO: <%= venta.precio %>€ </h5>
+            
+                            <h5 class="text-muted"><i> <%= venta.vendedor %>  </i></h5>
+                            <div class="d-flex justify-content-around flex-wrap mt-3">
+                                <a href="/comprar/<%= venta.id_stock %>" class="btn btn-success btn-block mx-2">
+                                    <i class="fas fa-money-bill-wave"></i> COMPRAR SKIN 
+                                </a>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            
+            <% }) %> 
+        </div>
+    </div>
+<% } %>
 
 <%- include('../templates/footer.ejs') %> 

@@ -1,7 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .contenedor-login{
     background-color: aquamarine;
-    width: 50vw;
-    padding: 1rem;
+    /* width: 50vw;
+    padding: 1rem; */
 }
 
 h5{
@@ -11,4 +15,33 @@ h5{
 
 .tablaTD{
     padding-right: 2vw;
+}
+
+li a{
+    text-decoration: none;
+    color: darkblue;
+}
+
+.primeraListaOrdenada li:nth-child(even){
+    background-color: rgb(175, 174, 174);
+}
+
+.segundaListaOrdenada li:nth-child(odd){
+    background-color: rgb(175, 174, 174);
+}
+
+.logo-twitter{
+    color: #00acee;
+}
+
+.logo-facebook{
+    color: #3b5998;
+}
+
+.logo-telefono{
+    color: brown;
+}
+
+.logo-email{
+    color: crimson;
 }

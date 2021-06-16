@@ -36,6 +36,7 @@ controller.postLogin = async (req, res, next) => {
             }else {
                 // TENGO QUE OBTENER LA CONTRASEÑA Y COMPROBAR SI ES IGUAL A LA QUE ME HAN PASADO
                 isContraseniaCorrecta(correo, contrasenia, (correcta) => {
+
                     if(!correcta){
                         erroresLogin.push({ text: 'LA CONTRASEÑA NO COINCIDE' });
                         req.session.usuario = null;
@@ -47,7 +48,7 @@ controller.postLogin = async (req, res, next) => {
                         console.log(req.session.usuario);
                         res.redirect('/inicio');
                     }
-                })
+                });
             }
         })
     }
@@ -96,8 +97,12 @@ controller.postRegister = async (req, res, next) => {
                 erroresRegister.push({ text: 'EL USUARIO YA ESTA REGISTRADO'});
                 res.redirect('/register');
             }else{
-                const contraEncriptada = bcrypt.hash(contrasenia, 10);
-                
+                const contraEncriptada = bcrypt.hashSync(contrasenia, 10);
+
+                console.log('CONTRASEÑA ENCRIPTADA: ');
+                console.log(contraEncriptada);
+                console.log(contrasenia);
+
                 let resgisterUser;
                 existenUsuarios((existen) => {
                     if(!existen){
@@ -174,10 +179,12 @@ function isContraseniaCorrecta(correo, contrasenia, callback){
             }else{
                 const contraseniaBD = result[0].contrasenia;
 
-                if(!bcrypt.compare(contraseniaBD, contrasenia)){
-                    callback(false);
-                }else {
+                const iguales = bcrypt.compareSync(contrasenia, contraseniaBD);
+
+                if(iguales){
                     callback(true);
+                }else if(!iguales){
+                    callback(false);
                 }
             }
         }

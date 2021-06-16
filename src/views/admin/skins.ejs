@@ -2,11 +2,11 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container-md p-md-4 p-sm-0">
+<div class="p-md-4 p-sm-0">
     <%- include('navbarAdmin.ejs')  %> 
 </div>
 
-<div class="container px-4">
+<div class="container px-4 mt-3">
     <a href="/admin/skins/add" class="btn btn-primary btn-block text-white col-12">
         <i class="far fa-plus-square"></i>  AÑADIR UNA NUEVA SKIN 
     </a>
@@ -17,7 +17,7 @@
         
         <% skins.forEach(skin => { %>
             
-            <div class="col-md-4 my-2">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>

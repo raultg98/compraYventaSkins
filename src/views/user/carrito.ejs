@@ -2,9 +2,9 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container px-5 py-3">
+<div class="container px-md-5 py-md-3 p-sm-0">
     <div>
-        <h2>1. DATOS USUARIO:</h2>
+        <h2 class="fw-bold">1. DATOS USUARIO</h2>
         <div class="mx-5">
 
             <table>
@@ -35,51 +35,60 @@
     </div>
 
     <div>
-        <h2>2. PRODUCTOS </h2>
+        <h2 class="fw-bold">2. PRODUCTOS </h2>
         
-        <div class="row mx-5">
-            <% skins.forEach(function (skin, i) { %>
+        <% if(skins.length == 0) { %>
+            <div class="text-muted mx-5 fs-1 fw-bold">
+                SIN SKINS 
+            </div>
+        <% }else { %>
+            <div class="row mx-md-5 mx-sm-0">
 
-                <h5> VENDEDOR: <span class="text-muted"> <%= skin.vendedor %> </span></h5>
-                <div class="col-12 d-flex align-items-center justify-content-between bg-dark text-white rounded my-2">
-                    
-                    <h5> <%= i + 1 %>  </h5>
-                    <img src="<%= skin.foto %>" alt="" style="width: 10vw;">
-                    <h5> <%= skin.categoria %> </h5>
-                    <h5> <%= skin.nombre %> </h5>
-                    <h5> <%= skin.precio %> $ </h5>
-                    
+                <% skins.forEach(function (skin, i) { %>
 
-                    <div class="btn btn-danger">
-                        <a href="/carrito/remove/<%= skin.id_carrito %>">
-                            <i class="fas fa-times text-white"></i>
-                        </a>
-                    </div>
+                    <h5> VENDEDOR: <span class="text-muted"> <%= skin.vendedor %> </span></h5>
+                    <div class="col-12 bg-dark text-white rounded my-2">
+                        <div class="row d-flex justify-content-center align-items-center fw-bold">
+                            <div class="col-1 "> <%= i + 1 %> </div>
+                            
+                            <div class="col-2">
+                                <img src="<%= skin.foto %>"  alt="Error-photo" style="width: 10vw;">
+                            </div>
+                            
+                            <div class="col-2"> <%= skin.categoria %> </div>
+                            <div class="col-4"> <%= skin.nombre %> </div>
+                            <div class="col-2 text-center"> <%= skin.precio %>$ </div>
 
-                </div>  
-            <% }); %>
-        </div>
+                            <a href="/carrito/remove/<%= skin.id_carrito %>" class="col-1 btn btn-danger">
+                                <i class="fas fa-times text-white"></i>
+                            </a>
+                        </div>
+
+                    </div>  
+                <% }); %>
+            </div>
+        <% } %>
     </div>
 
     <div>
-        <h2>3. PAGO</h2>
+        <h2 class="fw-bold">3. PAGO</h2>
 
         <div class="row mx-5 d-flex align-items-center">
             <table class="col-md-6 col-sm-12">
                 <tr>
-                    <td class="">
+                    <td>
                         <b>DINERO: </b>
                     </td>
-                    <td>
+                    <td class="text-start">
                         <b class="text-primary"> <%= dinero %> $</b>
                     </td>
                 </tr>
     
                 <tr>
-                    <td class="">
+                    <td>
                         <b>IMPORTE TOTAL: </b>
                     </td>
-                    <td>
+                    <td class="text-start">
                         <b class="text-primary"> <%= precioTotal %> $</b>
                     </td>
                 </tr>
@@ -88,7 +97,7 @@
                     <td class="">
                         <b>CUENTA: </b>
                     </td>
-                    <td>
+                    <td class="text-start">
                         <b id="dineroRestante"> <%= dinero - precioTotal%> $</b>
                     </td>
                 </tr>

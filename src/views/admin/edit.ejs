@@ -3,61 +3,67 @@
 <%- include('../templates/navbar.ejs') %> 
 
 
-<div class="container-md p-md-4 p-sm-0">
+<div class="p-md-4 p-sm-0">
     <%- include('navbarAdmin.ejs')  %> 
 </div>
 
-<div class="container p-4">
-    <div class="d-flex justify-content-center row">
-        <div class="col-8">
-
-            <form action="" method="POST">
-                <div class="d-flex justify-content-center">
-                    <img src="<%= datos.foto %>" alt="" style="width: 40%;">
+<div class="container my-sm-4 ">
+    <div class="row d-flex justify-content-center">
+        <form action="" method="POST" class="col-md-8 col-sm-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label fw-bold fs-5">Nombre: </label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<%= datos.nombre %>">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="precio" class="form-label fw-bold fs-5"><h5>Precio: </h5></label>
+                        <input type="number" class="form-control" id="precio" name="precio" placeholder="<%= datos.precio %>">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="img" class="form-label fw-bold fs-5"><h5>Imagen: </h5></label>
+                        <input type="text" class="form-control" id="img" name="foto" placeholder="<%= datos.foto %>">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="categoria" class="form-label fw-bold fs-5"><h5>Categoria: </h5></label>
+                        <select name="categoria" id="categoria" class="form-select" aria-label="<%= datos.categoria %>">
+                            <option value="AK47"> AK-47 </option>
+                            <option value="M4A4"> M4A4 </option>
+                            <option value="SSG"> SGG </option>
+                            <option value="AWP"> AWP </option>
+                            <option value="AUG"> AUG </option>
+                            <option value="DEAGLE"> DEAGLE </option>
+                            <option value="USP"> USP </option>
+                            <option value="GLOCK18"> GLOCK-18 </option>
+                            <option value="P250"> P250 </option>
+                            <option value="P90"> P90 </option>
+                            <option value="MAG7"> MAG-7 </option>
+                            <option value="MP9"> MP9 </option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label fw-bold fs-5"><h5>Descripcion: </h5></label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="<%= datos.descripcion %>">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="nombre"><h5>Nombre: </h5></label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<%= datos.nombre %>"
-                           value="<%= datos.nombre %>">
-                </div><br>
+            
+                <div class="col-12 mt-4 d-grid">
+                        <button type="submit" class="btn btn-success btn-block text-white mb-3">
+                            <i class="far fa-save"></i> Guardar 
+                        </button>
+        
+                        <a href="/admin/skins" class="btn btn-primary btn-block text-white">
+                            <i class="fas fa-undo"></i> Volver 
+                        </a>
 
-                <div class="form-group">
-                    <label for="precio"><h5>Precio: </h5></label>
-                    <input type="number" class="form-control" id="precio" name="precio" placeholder="<%= datos.precio %>"
-                           value="<%= datos.precio %>">
-                </div><br>
-
-                <div class="form-group">
-                    <label for="img"><h5>Imagen: </h5></label>
-                    <input type="text" class="form-control" id="img" name="foto" placeholder="<%= datos.foto %>"
-                           value="<%= datos.foto %>">
-                </div><br>
-
-                <div class="form-group">
-                    <label for="categoria"><h5>Categoria: </h5></label>
-                    <input type="text" class="form-control" id="categoria" name="categoria" placeholder="<%= datos.categoria %>"
-                           value="<%= datos.categoria %>">
-                </div><br>
-
-                <div class="form-group">
-                    <label for="descripcion"><h5>Descripcion: </h5></label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="<%= datos.descripcion %>"
-                           value="<%= datos.descripcion %>">
-                </div><br>
-
-                <div class="d-flex justify-content-around">
-                    <button type="submit" class="btn btn-success btn-block mx-2 text-white col-md-6 col-12">
-                        <i class="far fa-save"></i> Guardar 
-                    </button>
-
-                    <a href="/admin/skins" class="btn btn-primary btn-block text-white  col-md-6 col-12">
-                        <i class="fas fa-undo"></i> Volver 
-                    </a>
                 </div>
-               
-            </form>
-
-        </div>
+                
+            </div>
+        </form>
     </div>
 </div>
 

@@ -2,6 +2,38 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<h1> MIS COMPRAS </h1>
+<% if(compras.length == 0) { %>
+    <div class="container text-center text-muted">
+        <h1>ACTUALMENTE NO HAS COMPRADO NINGUNA SKIN</h1>
+    </div>
+<% }else { %>
+    <div class="p-md-4 p-sm-0 d-flex justify-content-center align-items-center">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" style="width: 80vw;">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Skin</th>
+                        <th scope="col">Comprador</th>
+                        <th scope="col">Vendedor</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <% compras.forEach(compra => { %>
+                        <tr>
+                            <th scope="row"> <%= compra.id_compra %> </td>
+                            <td> <%= compra.nombre %> </td>
+                            <td> <%= compra.comprador %> </td>
+                            <td> <%= compra.vendedor %> </td>
+                            <td> <%= compra.precio %>$ </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<% } %>
 
 <%- include('../templates/footer.ejs') %> 

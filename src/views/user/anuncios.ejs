@@ -2,33 +2,43 @@
 
 <%- include('../templates/navbar.ejs') %> 
 
-<div class="container">
-    <div class="row">
-        <% skins.forEach(skin => { %>
+
+<% if(skins.length == 0) { %>
+    <div class="container text-center text-muted">
+        <h1>ACTUALMENTE NO HAS VENDIDO NINGUNA SKIN</h1>
+    </div>
+<% }else { %>
+    <div class="container">
+        <div class="row">
+            <% skins.forEach(skin => { %>
             
-            <div class="col-md-4 my-2">
-                <div class="card">
-                    <div class="card-header bg-dark text-white">
-                        <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>
-                    </div>
-        
-                    <div class="card-body text-center">
-                        <img src="<%= skin.foto %>" class="" style="width: 40%;">
-                    
-                        <h5 class=""> PRECIO: <%= skin.precio %>€ </h5>
-        
-                        <div class="d-flex justify-content-around flex-wrap mt-3">
-                            <a href="/usuario/anuncios/delete/<%= skin.id_stock %>" class="btn btn-danger btn-block mx-2">
-                                <i class="fas fa-money-bill-wave"></i> QUITAR DE LA VENTA
-                            </a>
+                <div class="col-md-4 my-2">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h5> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h5>
                         </div>
-                            
+            
+                        <div class="card-body text-center">
+                            <img src="<%= skin.foto %>" class="" style="width: 40%;">
+                        
+                            <h5 class=""> PRECIO: <%= skin.precio %>€ </h5>
+            
+                            <div class="d-flex justify-content-around flex-wrap mt-3">
+                                <a href="/usuario/anuncios/delete/<%= skin.id_stock %>" class="btn btn-danger btn-block mx-2">
+                                    <i class="fas fa-money-bill-wave"></i> QUITAR DE LA VENTA
+                                </a>
+                            </div>
+                                
+                        </div>
                     </div>
                 </div>
-            </div>
-        
-        <% }) %> 
+            
+            <% }) %>
+        </div>
     </div>
-</div>
+<% } %>
+
+         
+
 
 <%- include('../templates/footer.ejs') %> 
