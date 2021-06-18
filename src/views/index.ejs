@@ -3,13 +3,157 @@
 <%- include('templates/navbar.ejs') %> 
 
 
-<div class="container my-3">
-    <h1>Pagina de Inicio</h1>
+<main class="row d-flex justify-content-center">
 
-    <div class="container">
-        <%= usuario %>
-    </div>
-</div>
+    <!-- <div class="col-sm-0 col-md-2 bg-primary divTextVertical">
+         TEXTO VERTICAL
+        <div class="fs-1 textVertical">COUNTER-STRIKE</div>
+    </div> -->
+
+    <div class="col-sm-12 col-md-8">
+        <h1>BIENVENIDO DE NUEVO: <span class="text-primary"><%= usuario %></span></h1>
+
+        <h5 class="textIndex text-center my-3">
+            SI QUIERES VENDER ALGUNA SKIN QUE NO QUIERAS O QUE NO USES ESTA ESTA TU PAGINA. COMPRA 
+            LAS SKINS QUE MAS TE GUSTEN A UN PRECIO IRRESISTIBLE
+        </h5>
+
+
+        <h4>ALGUNAS SKIN QUE TIENES A LA VENTA: </h4>
+        <% if(skinsVenta.length === 0){ %>
+            <h6 class="text-muted">PON ALGUNA SKIN EN VENTA</h6>
+        <% } else { %>
+            <div class="row">
+                <% let contador = 0 %>
+                <% skinsVenta.forEach(skin => { %>
+                    <% if(contador < 4){ %>
+                        <div class="col-6 col-sm-4 col-md-3 my-2 text-center">
+                            <div class="card">
+                                <div class="card-header bg-dark text-white">
+                                    <h6> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h6>
+                                </div>
     
+                                <div class="card-body text-center">
+                                    <img src="<%= skin.foto %> " width="80%">
+                                </div>
+                            </div>
+                        </div>
+                        <% contador++ %>
+                    <% } %>
+                    
+                <% }); %>
+            </div>
+        <% } %>
+
+        <h4>ALGUNAS SKINS A LA VENTA:</h4>
+        <% if(skinsCompra.length === 0){ %>
+            <h6 class="text-muted">ACTUALMENTE NO HAY NINGUNA SKIN A LA VENTA</h6>
+        <% } else { %>
+            <div class="row">
+                <% let contador = 0 %>
+                <% skinsCompra.forEach(skin => { %>
+                    <% if(contador < 3){ %>
+                        <div class="col-6 col-sm-4 col-md-3 text-center">
+                            <div class="card">
+                                <div class="card-header bg-dark text-white">
+                                    <h6> <%= skin.categoria.toString().toUpperCase() %> - <%= skin.nombre %> </h6>
+                                </div>
+    
+                                <div class="card-body text-center">
+                                    <img src="<%= skin.foto %> " width="80%">
+                                </div>
+                            </div>
+                        </div>
+                        <% contador++ %>
+                    <% } %>
+                    
+                <% }); %>
+            </div>
+        <% } %>
+        
+    </div>
+    
+    <!-- <div class="col-sm-0 col-md-2 bg-primary divTextVertical">
+         TEXTO VERTICAL -->
+        <!-- <div class="fs-1 textVertical">GLOBAL OFENSIVE</div>
+    </div> --> 
+</main>
+
     
 <%- include('templates/footer.ejs') %> 
+
+
+<!-- <div id="carruselConIntervalo" class="carousel carousel-dark slide" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        <button type="button" data-bs-target="#carruselConIntervalo" data-bs-slide-to="6" aria-label="Slide 7"></button>
+      </div>
+    <div class="carousel-inner" id="carruselAnidir">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <img src="/img/ak47-bloodsport.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">AK-47 BLOODSPORT</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/aug-akihabara.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">AUG AKIHABARA</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/awp-dragonLore.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">AWP DRAGON LORE</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/deagle-kumicho.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">DEAGLE KUMIHCO</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/m4a4-howl.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">M4A4 HOWL</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/ssg-bloodInTheWater.png">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">SSG BLOOD IN THE WATER</h5>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="/img/usp-killConfirmed.png" >
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-muted">USP KILL CONFIRMED</h5>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="carruselConIntervalo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carruselConIntervalo" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+</div>     -->
+

@@ -1,4 +1,3 @@
-const { resolveInclude } = require('ejs');
 const { Router } = require('express');
 const pool = require('../db/database');
 
@@ -9,6 +8,7 @@ router.get('/', (req, res, next)=>{
     if(req.session.usuario == null){
         res.redirect('/login');
     }else{
+
         res.redirect('/inicio');
     }
 });
@@ -22,11 +22,25 @@ router.get('/inicio', (req, res, next)=>{
     }else{
         const usuario = req.session.usuario;
 
-        dinero(usuario, (dineroUsuario, adminUsuario) => {
-            const dinero = dineroUsuario;
-            const admin = adminUsuario;
-            
-            res.render('index', { usuario, admin, dinero });
+        pool.query('SELECT skins.* FROM stock INNER JOIN skins ON stock.id_skin = skins.id_skin  INNER JOIN usuarios ON stock.id_vendedor = usuarios.id_user WHERE usuarios.correo = ? ', usuario, (err, result) => {
+            if(err) console.log(err);
+
+            const skinsVenta = result;
+
+            console.log(skinsVenta);
+
+            pool.query('SELECT skins.* FROM stock INNER JOIN skins ON stock.id_skin = skins.id_skin INNER JOIN usuarios ON stock.id_vendedor != usuarios.id_user WHERE usuarios.correo = ?', usuario, (err1, result1) => {
+                if(err1) console.log(err1);
+
+                const skinsCompra = result1;
+
+                dinero(usuario, (dineroUsuario, adminUsuario) => {
+                    const dinero = dineroUsuario;
+                    const admin = adminUsuario;
+                    
+                    res.render('index', { usuario, admin, dinero, skinsVenta, skinsCompra });
+                });
+            });
         });
     }
 });

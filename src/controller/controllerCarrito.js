@@ -98,7 +98,7 @@ controller.pagar = (req, res, next) => {
                         // PONERLE EL DINERO AL USUARIO QUE LA VENDIO ------> DONE
                         // AÑADIR LA TRANSACCION A UNA NUEVA TABLA ---------> DONE
 
-                        pool.query('SELECT carrito.*, stock.* FROM carrito INNER JOIN stock ON carrito.id_stock = stock.id_stock WHERE carrito.id_comprador = ?', id_user, (err2, result2) => {
+                        pool.query('SELECT carrito.*, stock.* FROM carrito INNER JOIN stock ON carrito.id_stock = stock.id_stock WHERE carrito.id_comprador = ?', id_user, async (err2, result2) => {
                             if(err2) console.log(err2);
 
                             for(let i=0; i<result2.length; i++){
@@ -108,33 +108,33 @@ controller.pagar = (req, res, next) => {
                                     id_skin, id_comprador, id_vendedor
                                 }
 
-                                pool.query('INSERT INTO compras SET ?', compra, (err3, result3) => {
+                                await pool.query('INSERT INTO compras SET ?', compra, (err3, result3) => {
                                     if(err3) console.log(err3);
 
                                     console.log('COMPRA INSERTADA');
                                 });
 
-                                pool.query('DELETE FROM carrito WHERE id_carrito = ?', id_carrito, (err5, result5) => {
+                                await pool.query('DELETE FROM carrito WHERE id_carrito = ?', id_carrito, (err5, result5) => {
                                     if(err5) console.log(err5);
                                     
                                     console.log('SE HAN BORRADO LAS SKINS DEL CARRITO');
                                 });
 
-                                pool.query('DELETE FROM stock WHERE id_stock = ?', id_stock, (err6, result6) => {
+                                await pool.query('DELETE FROM stock WHERE id_stock = ?', id_stock, (err6, result6) => {
                                     if(err6) console.log(err6);
 
                                     console.log('SE HAN BORRADO LAS QUE ESTABAN PUESTAS A LA VENTA');
                                 });
 
                                 const nuevoDineroComprador = dinero - dineroTotal;
-                                pool.query('UPDATE usuarios SET dinero = ? WHERE id_user = ?', [nuevoDineroComprador, id_comprador], (err7, result7) => {
+                                await pool.query('UPDATE usuarios SET dinero = ? WHERE id_user = ?', [nuevoDineroComprador, id_comprador], (err7, result7) => {
                                     if(err7) console.log(err7);
 
                                     console.log('SE HA MODIFICADO EL DINERO DEL COMPRADOR');
                                 });
 
                             
-                                pool.query('SELECT precio FROM skins WHERE id_skin = ?', id_skin, (err8, result8) => {
+                                await pool.query('SELECT precio FROM skins WHERE id_skin = ?', id_skin, (err8, result8) => {
                                     if(err8) console.log(err8);
                                     
                                     const precioSkin = result8[0].precio;

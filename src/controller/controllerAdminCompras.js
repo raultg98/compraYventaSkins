@@ -13,12 +13,21 @@ controller.getAdminCompras = (req, res, next) => {
             if(err) console.log(err);
 
             const compras = result;
+            let beneficiosTotales = 0;
 
-            dinero(usuario, (dineroUsuario, adminUsuario) => {
-                const dinero = dineroUsuario;
-                const admin = adminUsuario;
-                
-                res.render('admin/compras', { compras, admin, dinero });
+            pool.query('SELECT sum(skins.precio) as dinero FROM compras INNER JOIN skins ON compras.id_skin = skins.id_skin', (err1, result1) => {
+                if(err1) console.log(err1);
+
+                console.log('DINERO TOTAL');
+                console.log(result1);
+                beneficiosTotales = result1[0].dinero * 0.1;
+
+                dinero(usuario, (dineroUsuario, adminUsuario) => {
+                    const dinero = dineroUsuario;
+                    const admin = adminUsuario;
+                    
+                    res.render('admin/compras', { compras, admin, dinero, beneficiosTotales });
+                });
             });
         });
     }

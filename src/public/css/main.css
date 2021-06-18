@@ -2,6 +2,30 @@
     margin: 0;
     padding: 0;
 }
+.divTextVertical{
+    height: 100vh;
+}
+
+.textoVertical{
+    /* writing-mode: vertical-lr;
+    text-orientation: upright; */
+    /* transform: rotate(180deg); */
+}
+
+.textIndex{
+    width: 80%;
+    margin: 0 auto;
+    text-justify: center;
+}
+
+.carrusel {
+    width: 100%;
+    height: 40vh;
+}
+
+.carrusel img{
+    width: 30vw;
+}
 
 .contenedor-login{
     background-color: aquamarine;
